@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>May Car Automotive</title>
+    <!-- Favicon -->
+    <link rel="icon" href="/images/mycar-favicon.png" type="Favicon">
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/product-single-page.css">
+    <link rel="stylesheet" href="/css/cart-dropdown.css">
+</head>
+
+<body>
+    <!-- Top Header Start -->
+    <div class="top-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link">𝕏</a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="language-switcher">
+                        <div class="dropdown">
+                            <button class="btn dropdown-toggle" type="button" id="languageDropdown"
+                                data-bs-toggle="dropdown">
+                                <img src="https://flagcdn.com/w20/gb.png" alt="EN" class="flag-icon"> EN
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#"><img src="https://flagcdn.com/w20/de.png" alt="DE"
+                                            class="flag-icon"> DE</a></li>
+                                <li><a class="dropdown-item" href="#"><img src="https://flagcdn.com/w20/tr.png" alt="TR"
+                                            class="flag-icon"> TR</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Top Header End -->
+
+    <!-- Main Header Start -->
+    <header class="main-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-2 col-md-3 col-6">
+                    <div class="logo">
+                        <a href="index.html"><img src="/images/logo.png" alt="Logo" class="img-fluid"></a>
+                    </div>
+                </div>
+                <div class="col-lg-10 col-md-9 col-6 d-none d-md-flex justify-content-end">
+                    <nav class="main-nav">
+                        <ul class="nav-menu">
+                            <li class="nav-item search-item">
+                                <div class="search-bar">
+                                    <form class="search-form">
+                                        <div class="search-wrapper">
+                                            <input type="text" class="form-control" placeholder="Search products...">
+                                            <i class="fas fa-search search-icon"
+                                                onclick="document.querySelector('.search-form').submit()"></i>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+                            <li class="nav-item"><a href="all-products.html" class="nav-link">All Products</a></li>
+                            <li class="nav-item"><a href="all-news.html" class="nav-link">News</a></li>
+                            <li class="nav-item">
+                                <a href="login.html" class="nav-link login-link">
+                                    <i class="fas fa-user me-1"></i>
+                                    Log in</a>
+                            </li>
+                            <li class="nav-item cart-item">
+                                <a href="#" class="cart-link" onclick="toggleCart()">
+                                    <div class="cart-icon-wrapper">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <span class="cart-badge" id="cartBadge">0</span>
+                                    </div>
+                                    <span class="cart-total" id="headerCartTotal">0,00 €</span>
+                                </a>
+                                <!-- Cart Dropdown -->
+                                <div class="cart-dropdown" id="cartDropdown">
+                                    <div class="cart-dropdown-header">
+                                        <h4>Shopping Cart</h4>
+                                        <span class="cart-count" id="cartItemCount">0 items</span>
+                                    </div>
+                                    <div class="cart-dropdown-body">
+                                        <div class="cart-items" id="cartItems">
+                                            <!-- Cart items will be loaded here -->
+                                        </div>
+                                    </div>
+                                    <div class="cart-dropdown-footer">
+                                        <div class="cart-total-section">
+                                            <div class="total-price">
+                                                <span>Total: </span>
+                                                <span id="cartTotalPrice">0.00 €</span>
+                                            </div>
+                                        </div>
+                                        <div class="cart-buttons">
+                                            <button class="btn-continue" onclick="closeCart()">Continue Shopping</button>
+                                            <button class="btn-checkout" onclick="goToCart()">Go to Cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="mobile-menu-toggle d-md-none">
+                        <button class="btn" id="mobileMenuBtn">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Main Header End -->
+
+    <!-- Mobile Sidebar -->
+    <div class="mobile-sidebar" id="mobileSidebar">
+        <div class="sidebar-header">
+            <h5>Menu</h5>
+            <button class="btn-close" id="closeSidebar">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="sidebar-content">
+            <div class="mobile-search">
+                <form class="search-form">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search products...">
+                        <button class="btn btn-search" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="mobile-login">
+                <a href="#" class="btn btn-primary w-100">Log in</a>
+            </div>
+            <div class="mobile-social">
+                <h6>Follow Us</h6>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link">𝕏</a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb-nav">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home page</a></li>
+                <li class="breadcrumb-item"><a href="#">Our Offer</a></li>
+                <li class="breadcrumb-item"><a href="#">Audi</a></li>
+                <li class="breadcrumb-item"><a href="#">A3 / S3 / RS3</a></li>
+                <li class="breadcrumb-item"><a href="#">RS3</a></li>
+                <li class="breadcrumb-item"><a href="#">8Y Facelift [2024-]</a></li>
+                <li class="breadcrumb-item"><a href="#">Sportback</a></li>
+                <li class="breadcrumb-item active">Rear Splitter (with vertical bars) V.3 Audi RS3 Sportback 8Y Facelift</li>
+            </ol>
+        </div>
+    </nav>
+
+    <!-- Product Section Start -->
+    <section class="product-detail-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="product-gallery">
+                        <div class="main-image-container">
+                            <button class="nav-btn prev-btn" onclick="previousImage()">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <div class="main-image">
+                                <img src="/images/product-1.jpg" alt="Product" id="mainProductImage">
+                            </div>
+                            <button class="nav-btn next-btn" onclick="nextImage()">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                        <div class="thumbnail-gallery">
+                            <button class="thumb-nav prev-thumb" onclick="scrollThumbnails('left')">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <div class="thumbnail-container">
+                                <img src="/images/product-1.jpg" alt="Product" class="thumbnail active" onclick="changeMainImage(this, 0)">
+                                <img src="/images/product-2.jpg" alt="Product" class="thumbnail" onclick="changeMainImage(this, 1)">
+                                <img src="/images/product-3.jpg" alt="Product" class="thumbnail" onclick="changeMainImage(this, 2)">
+                                <img src="/images/product-4.jpg" alt="Product" class="thumbnail" onclick="changeMainImage(this, 3)">
+                                <img src="/images/product-5.jpg" alt="Product" class="thumbnail" onclick="changeMainImage(this, 4)">
+                            </div>
+                            <button class="thumb-nav next-thumb" onclick="scrollThumbnails('right')">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="product-info">
+                        <div class="product-badge">
+                            <span class="new-badge">NEW IN</span>
+                        </div>
+                        <h1 class="product-title">Rear Splitter (with vertical bars) V.3 Audi RS3 Sportback 8Y Facelift</h1>
+                        <div class="product-code">
+                            Product code <strong>AU-RS3-8YF-SB-RD3G+RD4G</strong>
+                        </div>
+                        <div class="product-price">
+                            <span class="price-amount">249,00 €</span>
+                            <span class="price-unit">/ pcs.</span>
+                        </div>
+                        <div class="net-price">
+                            net price 202,44 €
+                        </div>
+                        
+                        <div class="quantity-section">
+                            <div class="quantity-row">
+                                <div class="quantity-controls">
+                                    <button type="button" class="quantity-btn" onclick="decreaseQuantity()">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <input type="number" id="quantity" value="1" min="1" readonly>
+                                    <button type="button" class="quantity-btn" onclick="increaseQuantity()">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                                <button class="wishlist-btn" onclick="addToWishlist()">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                            <div class="animated-cart-container" onclick="addToCart()">
+                                <div class="left-side">
+                                    <div class="card">
+                                        <div class="card-line"></div>
+                                        <div class="buttons"></div>
+                                    </div>
+                                    <div class="post">
+                                        <div class="post-line"></div>
+                                        <div class="screen">
+                                            <div class="dollar">€</div>
+                                        </div>
+                                        <div class="numbers"></div>
+                                        <div class="numbers-line2"></div>
+                                    </div>
+                                </div>
+                                <div class="right-side">
+                                    <div class="new">Add to cart</div>
+                                    <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 451.846 451.847">
+                                        <path d="M345.441 248.292L151.154 442.573c-12.359 12.365-32.397 12.365-44.75 0-12.354-12.354-12.354-32.391 0-44.744L278.318 225.92 106.409 54.017c-12.354-12.359-12.354-32.394 0-44.748 12.354-12.359 32.391-12.359 44.75 0l194.287 194.284c6.177 6.18 9.262 14.271 9.262 22.366 0 8.099-3.091 16.196-9.267 22.373z" class="active-path" fill="#a1a1ff"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-info-extra">
+                            <div class="info-box">
+                                <img src="/images/rozet.svg" alt="Security" class="info-box-icon">
+                                <div class="info-box-text">
+                                    <p class="info-box-title">Security policy</p>
+                                    <p>We have very high quality standards for our suppliers</p>
+                                </div>
+                            </div>
+                            <div class="info-box">
+                                <img src="/images/whatsapp.svg" alt="Whatsapp" class="info-box-icon">
+                                <div class="info-box-text">
+                                    <p class="info-box-title">Quick contact</p>
+                                    <p>Reach us directly via Whatsapp</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product Description -->
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="product-details">
+                        <!-- Product description will be loaded by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Cart Modal -->
+    <div class="modal fade" id="cartModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Shopping Cart</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="modalCartItems"></div>
+                    <div class="cart-total">
+                        <h4>Total: <span id="cartTotalPrice">0.00</span> €</h4>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Continue Shopping</button>
+                    <button type="button" class="btn btn-primary">Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Product Section End -->
+
+    <!-- Footer Start -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="footer-section">
+                            <h5 class="footer-title">INFORMATION</h5>
+                            <ul class="footer-links">
+                                <li><a href="#">About Us</a></li>
+                                <li><a href="#">Shop information</a></li>
+                                <li><a href="#">Delivery</a></li>
+                                <li><a href="#">Payment information and commissions</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="footer-section">
+                            <h5 class="footer-title">CONTACT</h5>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <i class="fas fa-phone"></i>
+                                    <span>+49 123 456 7890</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-envelope"></i>
+                                    <span>info@maycar.com</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>123 Automotive Street, Berlin, Germany</span>
+                                </div>
+                            </div>
+                            <a href="contact.html" class="contact-btn">Contact Us</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="footer-section">
+                            <h5 class="footer-title">FOLLOW US</h5>
+                            <div class="footer-social-links">
+                                <a href="#" class="footer-social-link"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="footer-social-link">𝕏</a>
+                                <a href="#" class="footer-social-link"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="footer-social-link"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="footer-section">
+                            <div class="footer-logo">
+                                <img src="/images/logo-grey.png" alt="May Car Logo" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="payment-delivery-section">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="payment-methods">
+                            <h6>Our Payment Methods</h6>
+                            <div class="payment-icons">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg"
+                                    alt="Visa" class="payment-icon">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg"
+                                    alt="Mastercard" class="payment-icon">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg"
+                                    alt="American Express" class="payment-icon">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="delivery-methods">
+                            <h6>Our Delivery Methods</h6>
+                            <div class="delivery-icons">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/a/ac/DHL_Logo.svg" alt="DHL"
+                                    class="delivery-icon">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p class="copyright">&copy; 2024 May Car Automotive. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="footer-bottom-links">
+                            <a href="#">Privacy Policy</a>
+                            <a href="#">Terms of Service</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer End -->
+
+    <script src="js/script.js"></script>
+    <script src="js/header.js"></script>
+    <script src="js/cart-functions.js"></script>
+    <script src="js/add-product.js"></script>
+    <script src="js/product-single.js"></script>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,302 @@
+// New Products Slider JavaScript
+class NewProductsSlider {
+    constructor() {
+        this.slider = document.getElementById('productsSlider');
+        this.prevBtn = document.getElementById('prevBtn');
+        this.nextBtn = document.getElementById('nextBtn');
+        this.currentIndex = 0;
+        this.productsPerView = this.getProductsPerView();
+        this.products = this.getProductsData();
+        
+        this.init();
+    }
+
+    getProductsPerView() {
+        const width = window.innerWidth;
+        if (width <= 480) return 1;
+        if (width <= 768) return 2;
+        if (width <= 1200) return 3;
+        return 4;
+    }
+
+    getProductsData() {
+        return [
+            {
+                id: 1,
+                title: "Mercedes-Benz E-Class Premium Headlights",
+                price: 1250.00,
+                image: "/images/new-p1.jpeg",
+                badge: "New"
+            },
+            {
+                id: 2,
+                title: "BMW 3 Series LED Taillights Set",
+                price: 890.00,
+                image: "/images/pr-1.jpeg",
+                badge: "Hot"
+            },
+            {
+                id: 3,
+                title: "Audi A4 Sport Grille Chrome",
+                price: 450.00,
+                image: "/images/new-p3.jpeg",
+                badge: "Sale"
+            },
+            {
+                id: 4,
+                title: "Volkswagen Golf GTI Carbon Fiber Spoiler",
+                price: 320.00,
+                image: "/images/pr-2.jpeg",
+                badge: "New"
+            },
+            {
+                id: 5,
+                title: "Porsche 911 Turbo Side Mirrors",
+                price: 2100.00,
+                image: "/images/new-p5.jpeg",
+                badge: "Premium"
+            },
+            {
+                id: 5,
+                title: "Porsche 911 Turbo Side Mirrors",
+                price: 2100.00,
+                image: "/images/new-p5.jpeg",
+                badge: "Premium"
+            },
+            {
+                id: 5,
+                title: "Porsche 911 Turbo Side Mirrors",
+                price: 2100.00,
+                image: "/images/new-p5.jpeg",
+                badge: "Premium"
+            }
+        ];
+    }
+
+    init() {
+        this.renderProducts();
+        this.bindEvents();
+        this.updateSliderPosition();
+        
+        // Update products per view on resize
+        window.addEventListener('resize', () => {
+            this.productsPerView = this.getProductsPerView();
+            this.updateSliderPosition();
+        });
+    }
+
+    renderProducts() {
+        this.slider.innerHTML = '';
+        this.products.forEach(product => {
+            const productCard = document.createElement('div');
+            productCard.classList.add('product-card');
+            productCard.innerHTML = `
+                <a href="product-single-page.html?id=${product.id}" class="product-image-link">
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.title}">
+                        <span class="product-badge">${product.badge}</span>
+                    </div>
+                </a>
+                <div class="product-info">
+                    <h3 class="product-title">${product.title}</h3>
+                    <p class="product-price">${product.price.toFixed(2)} <span class="currency">€</span></p>
+                    <div class="product-actions">
+                        <button class="btn-add-cart" data-product-id="${product.id}">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+            `;
+            this.slider.appendChild(productCard);
+        });
+        
+        // Add event listeners for add to cart buttons
+        this.slider.querySelectorAll('.btn-add-cart').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const productId = parseInt(button.getAttribute('data-product-id'));
+                this.addToCart(productId);
+            });
+        });
+        
+        this.updateSliderPosition();
+    }
+
+    bindEvents() {
+        this.prevBtn.addEventListener('click', () => this.prevSlide());
+        this.nextBtn.addEventListener('click', () => this.nextSlide());
+        
+        // Touch/swipe support
+        let startX = 0;
+        let startY = 0;
+        let isDragging = false;
+        
+        this.slider.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+            isDragging = true;
+        });
+        
+        this.slider.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+        });
+        
+        this.slider.addEventListener('touchend', (e) => {
+            if (!isDragging) return;
+            
+            const endX = e.changedTouches[0].clientX;
+            const endY = e.changedTouches[0].clientY;
+            const diffX = startX - endX;
+            const diffY = startY - endY;
+            
+            // Only trigger if horizontal swipe is more significant than vertical
+            if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+                if (diffX > 0) {
+                    this.nextSlide();
+                } else {
+                    this.prevSlide();
+                }
+            }
+            
+            isDragging = false;
+        });
+    }
+
+    prevSlide() {
+        if (this.currentIndex > 0) {
+            this.currentIndex--;
+        } else {
+            this.currentIndex = Math.max(0, this.products.length - this.productsPerView);
+        }
+        this.updateSliderPosition();
+    }
+
+    nextSlide() {
+        const maxIndex = Math.max(0, this.products.length - this.productsPerView);
+        if (this.currentIndex < maxIndex) {
+            this.currentIndex++;
+        } else {
+            this.currentIndex = 0;
+        }
+        this.updateSliderPosition();
+    }
+
+    updateSliderPosition() {
+        const cardWidth = 300 + 30; // card width + margin
+        const translateX = -(this.currentIndex * cardWidth);
+        this.slider.style.transform = `translateX(${translateX}px)`;
+        
+        // Update button states
+        this.updateButtonStates();
+    }
+
+    updateButtonStates() {
+        const maxIndex = Math.max(0, this.products.length - this.productsPerView);
+        
+        this.prevBtn.style.opacity = this.currentIndex === 0 ? '0.5' : '1';
+        this.nextBtn.style.opacity = this.currentIndex >= maxIndex ? '0.5' : '1';
+        
+        this.prevBtn.disabled = this.currentIndex === 0;
+        this.nextBtn.disabled = this.currentIndex >= maxIndex;
+    }
+
+    addToCart(productId) {
+        const product = this.products.find(p => p.id === productId);
+        if (product) {
+            // Get existing cart from localStorage
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            // Check if product already exists in cart
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.title,
+                    price: product.price,
+                    image: product.image,
+                    quantity: 1
+                });
+            }
+            
+            // Save to localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+            
+            // Update cart display if function exists
+            if (typeof updateCartDisplay === 'function') {
+                updateCartDisplay();
+            }
+            
+            // Show success message
+            this.showNotification(`${product.title} added to cart!`, 'success');
+        }
+    }
+
+
+    showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `notification notification-${type}`;
+        notification.innerHTML = `
+            <div class="notification-content">
+                <i class="fas fa-check-circle"></i>
+                <span>${message}</span>
+            </div>
+        `;
+        
+        // Add notification styles if not exists
+        if (!document.querySelector('#notification-styles')) {
+            const styles = document.createElement('style');
+            styles.id = 'notification-styles';
+            styles.textContent = `
+                .notification {
+                    position: fixed;
+                    bottom: 20px;
+                    right: 20px;
+                    background: white;
+                    border-radius: 10px;
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                    z-index: 10000;
+                    animation: slideInRight 0.3s ease;
+                }
+                .notification-success {
+                    border-left: 4px solid #28a745;
+                }
+                .notification-content {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    padding: 15px 20px;
+                }
+                .notification-success i {
+                    color: #28a745;
+                }
+                @keyframes slideInRight {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+            `;
+            document.head.appendChild(styles);
+        }
+        
+        document.body.appendChild(notification);
+        
+        // Remove notification after 3 seconds
+        setTimeout(() => {
+            notification.style.animation = 'slideInRight 0.3s ease reverse';
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.parentNode.removeChild(notification);
+                }
+            }, 300);
+        }, 3000);
+    }
+}
+
+// Initialize the slider when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    window.newProductsSlider = new NewProductsSlider();
+});

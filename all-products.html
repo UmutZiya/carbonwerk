@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>May Car Automotive</title>
+    <!-- Favicon -->
+    <link rel="icon" href="/images/mycar-favicon.png" type="Favicon">
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/all-products.css">
+    <link rel="stylesheet" href="/css/cart-dropdown.css">
+</head>
+
+<body>
+    <!-- Top Header Start -->
+    <div class="top-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link">𝕏</a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="language-switcher">
+                        <div class="dropdown">
+                            <button class="btn dropdown-toggle" type="button" id="languageDropdown"
+                                data-bs-toggle="dropdown">
+                                <img src="https://flagcdn.com/w20/gb.png" alt="EN" class="flag-icon"> EN
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#"><img src="https://flagcdn.com/w20/de.png" alt="DE"
+                                            class="flag-icon"> DE</a></li>
+                                <li><a class="dropdown-item" href="#"><img src="https://flagcdn.com/w20/tr.png" alt="TR"
+                                            class="flag-icon"> TR</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Top Header End -->
+
+    <!-- Main Header Start -->
+    <header class="main-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-2 col-md-3 col-6">
+                    <div class="logo">
+                        <a href="index.html"><img src="/images/logo.png" alt="Logo" class="img-fluid"></a>
+                    </div>
+                </div>
+                <div class="col-lg-10 col-md-9 col-6 d-none d-md-flex justify-content-end">
+                    <nav class="main-nav">
+                        <ul class="nav-menu">
+                            <li class="nav-item search-item">
+                                <div class="search-bar">
+                                    <form class="search-form">
+                                        <div class="search-wrapper">
+                                            <input type="text" class="form-control" placeholder="Search products...">
+                                            <i class="fas fa-search search-icon"
+                                                onclick="document.querySelector('.search-form').submit()"></i>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+                            <li class="nav-item"><a href="all-products.html" class="nav-link">All Products</a></li>
+                            <li class="nav-item"><a href="all-news.html" class="nav-link">News</a></li>
+                            <li class="nav-item">
+                                <a href="login.html" class="nav-link login-link">
+                                    <i class="fas fa-user me-1"></i>
+                                    Log in</a>
+                            </li>
+                            <li class="nav-item cart-item">
+                                <a href="javascript:void(0)" class="cart-link" onclick="toggleCart()">
+                                    <div class="cart-icon-wrapper">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <span class="cart-badge" id="cartBadge">0</span>
+                                    </div>
+                                    <span class="cart-total" id="headerCartTotal">0,00 €</span>
+                                </a>
+                                <!-- Cart Dropdown -->
+                                <div class="cart-dropdown" id="cartDropdown">
+                                    <div class="cart-dropdown-header">
+                                        <h4>Shopping Cart</h4>
+                                        <span class="cart-count" id="cartItemCount">0 items</span>
+                                    </div>
+                                    <div class="cart-dropdown-body">
+                                        <div class="cart-items" id="cartItems">
+                                            <!-- Cart items will be loaded here -->
+                                        </div>
+                                    </div>
+                                    <div class="cart-dropdown-footer">
+                                        <div class="cart-total-section">
+                                            <div class="total-price">
+                                                <span>Total: </span>
+                                                <span id="cartTotalPrice">0.00 €</span>
+                                            </div>
+                                        </div>
+                                        <div class="cart-buttons">
+                                            <button class="btn-continue" onclick="closeCart()">Continue Shopping</button>
+                                            <button class="btn-checkout" onclick="goToCart()">Go to Cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="mobile-menu-toggle d-md-none">
+                        <button class="btn" id="mobileMenuBtn">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Main Header End -->
+
+    <!-- Mobile Sidebar -->
+    <div class="mobile-sidebar" id="mobileSidebar">
+        <div class="sidebar-header">
+            <h5>Menu</h5>
+            <button class="btn-close" id="closeSidebar">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="sidebar-content">
+            <div class="mobile-search">
+                <form class="search-form">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search products...">
+                        <button class="btn btn-search" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="mobile-login">
+                <a href="#" class="btn btn-primary w-100">Log in</a>
+            </div>
+            <div class="mobile-social">
+                <h6>Follow Us</h6>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link">𝕏</a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Page Header Start -->
+    <section class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="page-title">All Products</h1>
+                    <p class="page-subtitle">Discover our complete range of automotive products</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Page Header End -->
+
+    <!-- Product Filter Start -->
+    <section class="product-filter">
+        <div class="container">
+            <div class="filter-container">
+                <div class="filter-row">
+                    <div class="filter-item">
+                        <select id="brandSelect" class="filter-select">
+                            <option value="">Select Brand</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <select id="modelSelect" class="filter-select" disabled>
+                            <option value="">Select Model</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <select id="versionSelect" class="filter-select" disabled>
+                            <option value="">Select Version</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <select id="generationSelect" class="filter-select" disabled>
+                            <option value="">Select Generation</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <select id="typeSelect" class="filter-select" disabled>
+                            <option value="">Select Type</option>
+                        </select>
+                    </div>
+                    <div class="filter-actions">
+                        <button type="button" class="btn-clear" id="clearFilter">
+                            <i class="fas fa-times"></i> Clear
+                        </button>
+                        <button type="button" class="btn-search" id="searchFilter">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Filter End -->
+
+    <!-- Products Grid Start -->
+    <section class="products-grid">
+        <div class="container">
+            <div class="products-header">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <div class="products-count">
+                            <span id="productsCount">0 products found</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="sort-options">
+                            <select id="sortSelect" class="sort-select">
+                                <option value="name">Sort by Name</option>
+                                <option value="price-low">Price: Low to High</option>
+                                <option value="price-high">Price: High to Low</option>
+                                <option value="newest">Newest First</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="products-container" id="productsContainer">
+                <!-- Products will be dynamically added here -->
+            </div>
+            <div class="no-products" id="noProducts" style="display: none;">
+                <div class="no-products-content">
+                    <i class="fas fa-search"></i>
+                    <h3>No products found</h3>
+                    <p>No products match your current filter criteria. Please try adjusting your filters.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Products Grid End -->
+
+    <!-- Footer Start -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="footer-section">
+                            <h5 class="footer-title">INFORMATION</h5>
+                            <ul class="footer-links">
+                                <li><a href="#">About Us</a></li>
+                                <li><a href="#">Shop information</a></li>
+                                <li><a href="#">Delivery</a></li>
+                                <li><a href="#">Payment information and commissions</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="footer-section">
+                            <h5 class="footer-title">CONTACT</h5>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <i class="fas fa-phone"></i>
+                                    <span>+49 123 456 7890</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-envelope"></i>
+                                    <span>info@maycar.com</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>123 Automotive Street, Berlin, Germany</span>
+                                </div>
+                            </div>
+                            <a href="contact.html" class="contact-btn">Contact Us</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="footer-section">
+                            <h5 class="footer-title">FOLLOW US</h5>
+                            <div class="footer-social-links">
+                                <a href="#" class="footer-social-link"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="footer-social-link">𝕏</a>
+                                <a href="#" class="footer-social-link"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="footer-social-link"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="footer-section">
+                            <div class="footer-logo">
+                                <img src="/images/logo-grey.png" alt="May Car Logo" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="payment-delivery-section">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="payment-methods">
+                            <h6>Our Payment Methods</h6>
+                            <div class="payment-icons">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" class="payment-icon">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" class="payment-icon">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg" alt="American Express" class="payment-icon">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="delivery-methods">
+                            <h6>Our Delivery Methods</h6>
+                            <div class="delivery-icons">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/a/ac/DHL_Logo.svg" alt="DHL" class="delivery-icon">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p class="copyright">&copy; 2024 May Car Automotive. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="footer-bottom-links">
+                            <a href="#">Privacy Policy</a>
+                            <a href="#">Terms of Service</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer End -->
+
+    <script src="js/script.js"></script>
+    <script src="js/header.js"></script>
+    <script src="js/cart-functions.js"></script>
+    <script src="js/all-products.js"></script>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
