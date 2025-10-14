@@ -38,6 +38,7 @@
     list-style: none;
     padding: 0;
     margin: 0;
+    text-align: start;
 }
 
 .footer-links li {
@@ -45,12 +46,13 @@
 }
 
 .footer-links a {
-    color: var(--color-three);
+    color: #fff;
     text-decoration: none;
     font-size: 14px;
     transition: all 0.3s ease;
     display: block;
     padding: 5px 0;
+    text-align: start;
 }
 
 .footer-links a:hover {
@@ -237,11 +239,11 @@
     }
     
     .contact-item {
-        justify-content: center;
+        justify-content: start;
     }
     
     .footer-social-links {
-        justify-content: center;
+        justify-content: start;
     }
     
     .payment-methods,
@@ -258,6 +260,10 @@
     .footer-bottom-links a {
         margin: 0 10px;
     }
+
+    .footer-logo img{
+        margin-right: 10rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -267,6 +273,7 @@
     
     .footer-title {
         font-size: 1.1rem;
+        margin-right: 14rem;
     }
     
     .contact-item {
@@ -295,6 +302,7 @@
     .contact-btn {
         padding: 10px 20px;
         font-size: 13px;
+        margin-right: 17rem;
     }
 }
 /* Footer Styles End */

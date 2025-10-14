@@ -7,6 +7,7 @@ function updateCartDisplay() {
     // Update cart total in header
     const headerCartTotal = document.getElementById('headerCartTotal');
     const cartBadge = document.getElementById('cartBadge');
+    const mobileCartBadge = document.getElementById('mobileCartBadge');
     
     if (headerCartTotal) {
         headerCartTotal.textContent = `${cartTotal.toFixed(2)} €`;
@@ -15,6 +16,11 @@ function updateCartDisplay() {
     if (cartBadge) {
         cartBadge.textContent = cartItemCount;
         cartBadge.style.display = cartItemCount > 0 ? 'flex' : 'none';
+    }
+    
+    if (mobileCartBadge) {
+        mobileCartBadge.textContent = cartItemCount;
+        mobileCartBadge.style.display = cartItemCount > 0 ? 'flex' : 'none';
     }
 }
 
@@ -114,9 +120,15 @@ function removeFromCart(buttonElement, index) {
 // Close cart when clicking outside
 document.addEventListener('click', function(event) {
     const cartDropdown = document.getElementById('cartDropdown');
-    const cartLink = document.querySelector('.cart-link');
-    
-    if (cartDropdown && !cartDropdown.contains(event.target) && !cartLink.contains(event.target)) {
+    const cartLinks = document.querySelectorAll('.cart-link');
+    let isClickInsideCartLink = false;
+    cartLinks.forEach(link => {
+        if (link.contains(event.target)) {
+            isClickInsideCartLink = true;
+        }
+    });
+
+    if (cartDropdown && !cartDropdown.contains(event.target) && !isClickInsideCartLink) {
         cartDropdown.classList.remove('active');
     }
 });
@@ -124,4 +136,32 @@ document.addEventListener('click', function(event) {
 // Initialize cart display on page load
 document.addEventListener('DOMContentLoaded', function() {
     updateCartDisplay();
+
+    const cartDropdown = document.getElementById('cartDropdown');
+    const desktopCartContainer = document.querySelector('.cart-item');
+    const mobileCartContainer = document.querySelector('.mobile-cart-item');
+
+    function moveCartDropdown() {
+        if (window.innerWidth < 768) { // Mobile
+            if (mobileCartContainer && cartDropdown) {
+                mobileCartContainer.appendChild(cartDropdown);
+            }
+        } else { // Desktop
+            if (desktopCartContainer && cartDropdown) {
+                desktopCartContainer.appendChild(cartDropdown);
+            }
+        }
+    }
+
+    moveCartDropdown();
+    window.addEventListener('resize', moveCartDropdown);
+    
+    // Mobile cart functionality
+    const mobileCartLink = document.querySelector('.mobile-cart-item .cart-link');
+    if (mobileCartLink) {
+        mobileCartLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            toggleCart();
+        });
+    }
 });

@@ -131,14 +131,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (isAnimating) return;
         
         isAnimating = true;
-        const card = slider.querySelector('.most-selling-card');
-        if (!card) {
-            isAnimating = false;
-            return;
-        }
-        const cardStyle = window.getComputedStyle(card);
-        const cardMargin = parseFloat(cardStyle.marginLeft) + parseFloat(cardStyle.marginRight);
-        const cardWidth = card.offsetWidth + cardMargin;
+        const containerWidth = slider.parentElement.offsetWidth;
+        const cardsPerView = getCardsPerView();
+        const cardWidth = containerWidth / cardsPerView;
         const translateX = -currentIndex * cardWidth;
         
         slider.style.transform = `translateX(${translateX}px)`;

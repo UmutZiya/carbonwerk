@@ -276,8 +276,23 @@
 
 @media (max-width: 480px) {
     .cart-dropdown {
-        width: 300px;
-        right: -100px;
+        width: 280px;
+        right: -50px;
+        left: auto;
+        transform-origin: top right;
+    }
+    
+    .mobile-cart-item {
+        position: relative;
+    }
+    
+    .mobile-cart-item .cart-dropdown {
+        position: fixed;
+        top: 80px;
+        right: 10px;
+        left: auto;
+        width: calc(100vw - 20px);
+        max-width: 350px;
     }
     
     .cart-dropdown-header,

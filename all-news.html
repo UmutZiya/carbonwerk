@@ -17,6 +17,11 @@
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/footer.css">
     <link rel="stylesheet" href="/css/all-news.css">
+    <link rel="stylesheet" href="/css/cart-dropdown.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -62,8 +67,8 @@
                         <a href="index.html"><img src="/images/logo.png" alt="Logo" class="img-fluid"></a>
                     </div>
                 </div>
-                <div class="col-lg-10 col-md-9 col-6 d-none d-md-flex justify-content-end">
-                    <nav class="main-nav">
+                <div class="col-lg-10 col-md-9 col-6">
+                    <nav class="main-nav d-none d-md-flex justify-content-end">
                         <ul class="nav-menu">
                             <li class="nav-item search-item">
                                 <div class="search-bar">
@@ -84,17 +89,54 @@
                                     Log in</a>
                             </li>
                             <li class="nav-item cart-item">
-                                <a href="#" class="cart-link">
-                                    <i class="fas fa-shopping-cart"></i>
-                                    <span class="cart-total">0,00 €</span>
+                                <a href="javascript:void(0)" class="cart-link" onclick="toggleCart()">
+                                    <div class="cart-icon-wrapper">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <span class="cart-badge" id="cartBadge">0</span>
+                                    </div>
+                                    <span class="cart-total" id="headerCartTotal">0,00 €</span>
                                 </a>
+                                <!-- Cart Dropdown -->
+                                <div class="cart-dropdown" id="cartDropdown">
+                                    <div class="cart-dropdown-header">
+                                        <h4>Shopping Cart</h4>
+                                        <span class="cart-count" id="cartItemCount">0 items</span>
+                                    </div>
+                                    <div class="cart-dropdown-body">
+                                        <div class="cart-items" id="cartItems">
+                                            <!-- Cart items will be loaded here -->
+                                        </div>
+                                    </div>
+                                    <div class="cart-dropdown-footer">
+                                        <div class="cart-total-section">
+                                            <div class="total-price">
+                                                <span>Total: </span>
+                                                <span id="cartTotalPrice">0.00 €</span>
+                                            </div>
+                                        </div>
+                                        <div class="cart-buttons">
+                                            <button class="btn-continue" onclick="closeCart()">Continue Shopping</button>
+                                            <button class="btn-checkout" onclick="goToCart()">Go to Cart</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </li>
                         </ul>
                     </nav>
-                    <div class="mobile-menu-toggle d-md-none">
-                        <button class="btn" id="mobileMenuBtn">
-                            <i class="fas fa-bars"></i>
-                        </button>
+                    <div class="mobile-header-actions d-flex d-md-none justify-content-end align-items-center">
+                        <div class="mobile-cart-item">
+                            <a href="javascript:void(0)" class="cart-link" onclick="toggleCart()">
+                                <div class="cart-icon-wrapper">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    <span class="cart-badge" id="mobileCartBadge">0</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="mobile-menu-toggle">
+                            <button class="btn" id="mobileMenuBtn">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -121,8 +163,24 @@
                     </div>
                 </form>
             </div>
+            <nav class="mobile-nav">
+                <ul class="mobile-nav-menu">
+                    <li class="mobile-nav-item">
+                        <a href="all-products.html" class="mobile-nav-link">
+                            <i class="fas fa-box"></i> All Products
+                        </a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="all-news.html" class="mobile-nav-link">
+                            <i class="fas fa-newspaper"></i> News
+                        </a>
+                    </li>
+                </ul>
+            </nav>
             <div class="mobile-login">
-                <a href="#" class="btn btn-primary w-100">Log in</a>
+                <a href="login.html" class="btn btn-primary w-100">
+                    <i class="fas fa-user me-2"></i> Log in
+                </a>
             </div>
             <div class="mobile-social">
                 <h6>Follow Us</h6>
@@ -186,15 +244,18 @@
                             <div class="contact-info">
                                 <div class="contact-item">
                                     <i class="fas fa-phone"></i>
-                                    <span>+49 123 456 7890</span>
+                                    <span>+49 230/75025507</span>
                                 </div>
                                 <div class="contact-item">
                                     <i class="fas fa-envelope"></i>
-                                    <span>info@maycar.com</span>
+                                    <span>info@carbonwerk-germany-b2b.de</span>
                                 </div>
                                 <div class="contact-item">
                                     <i class="fas fa-map-marker-alt"></i>
-                                    <span>123 Automotive Street, Berlin, Germany</span>
+                                    <span>Buschweg 13
+                                        59174 Kamen
+                                        Germany
+                                    </span>
                                 </div>
                             </div>
                             <a href="contact.html" class="contact-btn">Contact Us</a>
@@ -261,6 +322,7 @@
 
     <script src="js/script.js"></script>
     <script src="js/header.js"></script>
+    <script src="js/cart-functions.js"></script>
     <script src="js/all-news.js"></script>
     <!-- Bootstrap JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

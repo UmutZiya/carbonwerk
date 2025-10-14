@@ -184,7 +184,8 @@ class NewProductsSlider {
     }
 
     updateSliderPosition() {
-        const cardWidth = 300 + 30; // card width + margin
+        const containerWidth = this.slider.parentElement.offsetWidth;
+        const cardWidth = containerWidth / this.productsPerView;
         const translateX = -(this.currentIndex * cardWidth);
         this.slider.style.transform = `translateX(${translateX}px)`;
         

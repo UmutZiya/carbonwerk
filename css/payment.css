@@ -376,7 +376,7 @@
 /* Responsive */
 @media (max-width: 768px) {
     .checkout-progress {
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
         gap: 20px;
     }

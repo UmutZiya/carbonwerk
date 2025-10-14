@@ -1,32 +1,63 @@
-
-// Mobile Sidebar Toggle
+// Mobile Menu Toggle Functionality
 document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const mobileSidebar = document.getElementById('mobileSidebar');
-    const sidebarOverlay = document.getElementById('sidebarOverlay');
     const closeSidebar = document.getElementById('closeSidebar');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
 
-    // Open sidebar
-    mobileMenuBtn.addEventListener('click', function() {
-        mobileSidebar.classList.add('active');
-        sidebarOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    });
-
-    // Close sidebar
-    function closeSidebarFunc() {
-        mobileSidebar.classList.remove('active');
-        sidebarOverlay.classList.remove('active');
-        document.body.style.overflow = 'auto';
+    // Open mobile menu
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileSidebar.classList.add('active');
+            sidebarOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
     }
 
-    closeSidebar.addEventListener('click', closeSidebarFunc);
-    sidebarOverlay.addEventListener('click', closeSidebarFunc);
+    // Close mobile menu
+    function closeMobileMenu() {
+        mobileSidebar.classList.remove('active');
+        sidebarOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
 
-    // Close sidebar on escape key
+    if (closeSidebar) {
+        closeSidebar.addEventListener('click', closeMobileMenu);
+    }
+
+    if (sidebarOverlay) {
+        sidebarOverlay.addEventListener('click', closeMobileMenu);
+    }
+
+    // Close menu on escape key
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && mobileSidebar.classList.contains('active')) {
-            closeSidebarFunc();
+            closeMobileMenu();
         }
     });
+
+    // Close menu when clicking on mobile nav links
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+    mobileNavLinks.forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+    });
 });
+
+// Cart Badge Update Function
+function updateCartBadge(count) {
+    const cartBadge = document.getElementById('cartBadge');
+    const mobileCartBadge = document.getElementById('mobileCartBadge');
+    
+    if (cartBadge) {
+        cartBadge.textContent = count;
+        cartBadge.style.display = count > 0 ? 'flex' : 'none';
+    }
+    
+    if (mobileCartBadge) {
+        mobileCartBadge.textContent = count;
+        mobileCartBadge.style.display = count > 0 ? 'flex' : 'none';
+    }
+}
+
+// Initialize cart badge
+updateCartBadge(0);
