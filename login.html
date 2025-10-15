@@ -92,6 +92,34 @@
                                     Log in</a>
                             </li>
                             <li class="nav-item cart-item">
+                                <a href="#" id="wishlistLink" class="wishlist-link" onclick="toggleWishlist()">
+                                    <div class="cart-icon-wrapper">
+                                        <i class="fas fa-heart kalp"></i>
+                                        <span class="cart-badge" id="wishlistBadge">0</span>
+                                    </div>
+                                </a>
+                                <!-- Wishlist Dropdown -->
+                                <div class="cart-dropdown" id="wishlistDropdown">
+                                    <div class="cart-dropdown-header">
+                                        <h4>Wishlist</h4>
+                                        <span class="cart-count" id="wishlistItemCount">0 items</span>
+                                    </div>
+                                    <div class="cart-dropdown-body">
+                                        <div class="cart-items" id="wishlistItems">
+                                            <!-- Wishlist items will be loaded here -->
+                                        </div>
+                                    </div>
+                                    <div class="cart-dropdown-footer">
+                                        <div class="cart-buttons">
+                                            <button class="btn-continue" onclick="closeWishlist()">Continue
+                                                Shopping</button>
+                                            <button class="btn-checkout" onclick="goToWishlist()">Go to
+                                                Wishlist</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item cart-item">
                                 <a href="#" class="cart-link">
                                     <i class="fas fa-shopping-cart"></i>
                                     <span class="cart-total">0,00 €</span>

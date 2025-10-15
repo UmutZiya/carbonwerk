@@ -120,15 +120,9 @@ function removeFromCart(buttonElement, index) {
 // Close cart when clicking outside
 document.addEventListener('click', function(event) {
     const cartDropdown = document.getElementById('cartDropdown');
-    const cartLinks = document.querySelectorAll('.cart-link');
-    let isClickInsideCartLink = false;
-    cartLinks.forEach(link => {
-        if (link.contains(event.target)) {
-            isClickInsideCartLink = true;
-        }
-    });
+    const cartLink = document.getElementById('cartLink');
 
-    if (cartDropdown && !cartDropdown.contains(event.target) && !isClickInsideCartLink) {
+    if (cartDropdown && cartLink && !cartDropdown.contains(event.target) && !cartLink.contains(event.target)) {
         cartDropdown.classList.remove('active');
     }
 });
@@ -138,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
     updateCartDisplay();
 
     const cartDropdown = document.getElementById('cartDropdown');
-    const desktopCartContainer = document.querySelector('.cart-item');
+    const desktopCartContainer = document.querySelector('.cart-link').closest('.cart-item');
     const mobileCartContainer = document.querySelector('.mobile-cart-item');
 
     function moveCartDropdown() {

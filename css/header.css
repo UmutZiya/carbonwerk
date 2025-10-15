@@ -262,6 +262,10 @@
     color: var(--primary-color);
 }
 
+.kalp{
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
 
 
 /* Mobile Header Actions */

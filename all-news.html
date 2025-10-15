@@ -21,7 +21,9 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
@@ -89,6 +91,34 @@
                                     Log in</a>
                             </li>
                             <li class="nav-item cart-item">
+                                <a href="#" id="wishlistLink" class="wishlist-link" onclick="toggleWishlist()">
+                                    <div class="cart-icon-wrapper">
+                                        <i class="fas fa-heart kalp"></i>
+                                        <span class="cart-badge" id="wishlistBadge">0</span>
+                                    </div>
+                                </a>
+                                <!-- Wishlist Dropdown -->
+                                <div class="cart-dropdown" id="wishlistDropdown">
+                                    <div class="cart-dropdown-header">
+                                        <h4>Wishlist</h4>
+                                        <span class="cart-count" id="wishlistItemCount">0 items</span>
+                                    </div>
+                                    <div class="cart-dropdown-body">
+                                        <div class="cart-items" id="wishlistItems">
+                                            <!-- Wishlist items will be loaded here -->
+                                        </div>
+                                    </div>
+                                    <div class="cart-dropdown-footer">
+                                        <div class="cart-buttons">
+                                            <button class="btn-continue" onclick="closeWishlist()">Continue
+                                                Shopping</button>
+                                            <button class="btn-checkout" onclick="goToWishlist()">Go to
+                                                Wishlist</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item cart-item">
                                 <a href="javascript:void(0)" class="cart-link" onclick="toggleCart()">
                                     <div class="cart-icon-wrapper">
                                         <i class="fas fa-shopping-cart"></i>
@@ -115,7 +145,8 @@
                                             </div>
                                         </div>
                                         <div class="cart-buttons">
-                                            <button class="btn-continue" onclick="closeCart()">Continue Shopping</button>
+                                            <button class="btn-continue" onclick="closeCart()">Continue
+                                                Shopping</button>
                                             <button class="btn-checkout" onclick="goToCart()">Go to Cart</button>
                                         </div>
                                     </div>
@@ -287,9 +318,12 @@
                         <div class="payment-methods">
                             <h6>Our Payment Methods</h6>
                             <div class="payment-icons">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" class="payment-icon">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" class="payment-icon">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg" alt="American Express" class="payment-icon">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg"
+                                    alt="Visa" class="payment-icon">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg"
+                                    alt="Mastercard" class="payment-icon">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg"
+                                    alt="American Express" class="payment-icon">
                             </div>
                         </div>
                     </div>
@@ -297,7 +331,8 @@
                         <div class="delivery-methods">
                             <h6>Our Delivery Methods</h6>
                             <div class="delivery-icons">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/a/ac/DHL_Logo.svg" alt="DHL" class="delivery-icon">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/a/ac/DHL_Logo.svg" alt="DHL"
+                                    class="delivery-icon">
                             </div>
                         </div>
                     </div>
@@ -324,6 +359,7 @@
     <script src="js/header.js"></script>
     <script src="js/cart-functions.js"></script>
     <script src="js/all-news.js"></script>
+    <script src="js/wishlist.js"></script>
     <!-- Bootstrap JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
