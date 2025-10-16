@@ -378,6 +378,39 @@ class DataStore {
 
 const store = new DataStore()
 
+// Theme Management
+function initializeTheme() {
+  const savedTheme = localStorage.getItem('theme') || 'dark'
+  const themeCheckbox = document.getElementById('theme-checkbox')
+  
+  if (savedTheme === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light')
+    themeCheckbox.checked = false
+  } else {
+    document.documentElement.removeAttribute('data-theme')
+    themeCheckbox.checked = true
+  }
+  
+  themeCheckbox.addEventListener('change', toggleTheme)
+}
+
+function toggleTheme() {
+  const themeCheckbox = document.getElementById('theme-checkbox')
+  
+  if (themeCheckbox.checked) {
+    // Dark theme
+    document.documentElement.removeAttribute('data-theme')
+    localStorage.setItem('theme', 'dark')
+  } else {
+    // Light theme
+    document.documentElement.setAttribute('data-theme', 'light')
+    localStorage.setItem('theme', 'light')
+  }
+}
+
+// Initialize theme on page load
+document.addEventListener('DOMContentLoaded', initializeTheme)
+
 // Müşteri listesi render fonksiyonu
 function renderCustomersList() {
   const customers = store.getCustomers()
