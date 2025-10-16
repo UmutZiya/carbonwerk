@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CarbonWerk Admin Panel</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="admin-container">
@@ -62,12 +63,28 @@
                     </div>
                 </div>
                 
+                <a href="#" class="nav-item" data-page="cash-management">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M4 4H16C17.1046 4 18 4.89543 18 6V14C18 15.1046 17.1046 16 16 16H4C2.89543 16 2 15.1046 2 14V6C2 4.89543 2.89543 4 4 4Z" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M10 8V12M8 10H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    <span>Kasa Yönetimi</span>
+                </a>
+                
                 <a href="#" class="nav-item" data-page="orders">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M6 2L3 6V18C3 18.5304 3.21071 19.0391 3.58579 19.4142C3.96086 19.7893 4.46957 20 5 20H15C15.5304 20 16.0391 19.7893 16.4142 19.4142C16.7893 19.0391 17 18.5304 17 18V6L14 2H6Z" stroke="currentColor" stroke-width="1.5"/>
                         <path d="M3 6H17M13 10C13 11.0609 12.5786 12.0783 11.8284 12.8284C11.0783 13.5786 10.0609 14 9 14C7.93913 14 6.92172 13.5786 6.17157 12.8284C5.42143 12.0783 5 11.0609 5 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
                     </svg>
                     <span>Siparişler</span>
+                </a>
+                
+                <a href="#" class="nav-item" data-page="customers">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M13 7C13 9.20914 11.2091 11 9 11C6.79086 11 5 9.20914 5 7C5 4.79086 6.79086 3 9 3C11.2091 3 13 4.79086 13 7Z" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M2 17C2 13.134 5.13401 10 9 10C12.866 10 16 13.134 16 17" stroke="currentColor" stroke-width="1.5"/>
+                    </svg>
+                    <span>Müşteri Yönetimi</span>
                 </a>
             </nav>
             
@@ -566,6 +583,186 @@
             </div>
 
               
+            <div id="cash-management-page" class="page">
+                <div class="page-header">
+                    <h1>Kasa Yönetimi</h1>
+                    <p class="page-subtitle">Gelir ve gider takibi yapın, kar/zarar durumunu görüntüleyin</p>
+                </div>
+                
+                <!-- Özet Kartları -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon stat-icon-success">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2L2 7V17C2 17.5304 2.21071 18.0391 2.58579 18.4142C2.96086 18.7893 3.46957 19 4 19H20C20.5304 19 21.0391 18.7893 21.4142 18.4142C21.7893 18.0391 22 17.5304 22 17V7L12 2Z" stroke="currentColor" stroke-width="2"/>
+                                <path d="M16 11L12 7L8 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-label">Toplam Gelir</div>
+                            <div class="stat-value" id="total-income">₺0</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon stat-icon-warning">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2L2 7V17C2 17.5304 2.21071 18.0391 2.58579 18.4142C2.96086 18.7893 3.46957 19 4 19H20C20.5304 19 21.0391 18.7893 21.4142 18.4142C21.7893 18.0391 22 17.5304 22 17V7L12 2Z" stroke="currentColor" stroke-width="2"/>
+                                <path d="M8 13L12 17L16 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-label">Toplam Gider</div>
+                            <div class="stat-value" id="total-expense">₺0</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon stat-icon-primary">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                                <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-label">Net Kar/Zarar</div>
+                            <div class="stat-value" id="net-profit">₺0</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Grafik Bölümü -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3>Finansal Analiz</h3>
+                        <div class="chart-controls">
+                            <select id="chart-period" class="chart-select">
+                                <option value="6">Son 6 Ay</option>
+                                <option value="12" selected>Son 12 Ay</option>
+                                <option value="all">Tümü</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="cashChart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Tab Menüsü -->
+                <div class="category-tabs">
+                    <button class="tab-btn active" data-cash-tab="income">Gelir</button>
+                    <button class="tab-btn" data-cash-tab="expense">Gider</button>
+                </div>
+                
+                <!-- Gelir Sekmesi -->
+                <div class="cash-tab-content active" data-cash-tab="income">
+                    <div class="add-form-card">
+                        <h3>Yeni Gelir Ekle</h3>
+                        <form id="income-form" class="add-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="income-description">Açıklama</label>
+                                    <input type="text" id="income-description" placeholder="Gelir açıklaması" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="income-amount">Tutar (₺)</label>
+                                    <input type="number" id="income-amount" placeholder="0.00" step="0.01" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="income-category">Kategori</label>
+                                    <select id="income-category" required>
+                                        <option value="">Kategori seçin...</option>
+                                        <option value="sales">Satış</option>
+                                        <option value="service">Hizmet</option>
+                                        <option value="other">Diğer</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="income-date">Tarih</label>
+                                    <input type="date" id="income-date" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Gelir Ekle</button>
+                        </form>
+                    </div>
+                    
+                    <div class="list-card">
+                        <h3>Gelir Listesi</h3>
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Tarih</th>
+                                        <th>Açıklama</th>
+                                        <th>Kategori</th>
+                                        <th>Tutar</th>
+                                        <th>İşlemler</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="income-list"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Gider Sekmesi -->
+                <div class="cash-tab-content" data-cash-tab="expense">
+                    <div class="add-form-card">
+                        <h3>Yeni Gider Ekle</h3>
+                        <form id="expense-form" class="add-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="expense-description">Açıklama</label>
+                                    <input type="text" id="expense-description" placeholder="Gider açıklaması" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="expense-amount">Tutar (₺)</label>
+                                    <input type="number" id="expense-amount" placeholder="0.00" step="0.01" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="expense-category">Kategori</label>
+                                    <select id="expense-category" required>
+                                        <option value="">Kategori seçin...</option>
+                                        <option value="rent">Kira</option>
+                                        <option value="utilities">Faturalar</option>
+                                        <option value="supplies">Malzeme</option>
+                                        <option value="marketing">Pazarlama</option>
+                                        <option value="other">Diğer</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="expense-date">Tarih</label>
+                                    <input type="date" id="expense-date" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Gider Ekle</button>
+                        </form>
+                    </div>
+                    
+                    <div class="list-card">
+                        <h3>Gider Listesi</h3>
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Tarih</th>
+                                        <th>Açıklama</th>
+                                        <th>Kategori</th>
+                                        <th>Tutar</th>
+                                        <th>İşlemler</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="expense-list"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             <div id="orders-page" class="page">
                 <div class="page-header">
                     <h1>Siparişler</h1>
@@ -588,6 +785,31 @@
                                 </tr>
                             </thead>
                             <tbody id="orders-list-table"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Müşteri Yönetimi Sayfası -->
+            <div id="customers-page" class="page">
+                <div class="page-header">
+                    <h1>Müşteri Yönetimi</h1>
+                    <p class="page-subtitle">Müşteri bilgilerini görüntüleyin ve yönetin</p>
+                </div>
+                
+                <div class="list-card">
+                    <h3>Müşteri Listesi</h3>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Ad Soyad</th>
+                                    <th>Telefon</th>
+                                    <th>E-posta</th>
+                                    <th>İşlemler</th>
+                                </tr>
+                            </thead>
+                            <tbody id="customers-list-table"></tbody>
                         </table>
                     </div>
                 </div>
@@ -760,6 +982,19 @@
                     <button type="submit" class="btn btn-primary">Güncelle</button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <!-- Müşteri Detay Modalı -->
+    <div id="customer-detail-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Müşteri Detayları</h2>
+                <button class="modal-close" onclick="closeCustomerDetailModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="customer-detail-content">
+                <!-- Müşteri detayları burada gösterilecek -->
+            </div>
         </div>
     </div>
 

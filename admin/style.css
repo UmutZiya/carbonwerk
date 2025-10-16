@@ -254,19 +254,20 @@ body {
 }
 
 .stat-card {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius);
-  padding: 24px;
+  background: linear-gradient(135deg, var(--bg-secondary) 60%, var(--bg-tertiary) 100%);
+  border: none;
+  border-radius: 24px;
+  padding: 32px 28px;
   display: flex;
   align-items: center;
-  gap: 16px;
-  transition: all 0.2s ease;
+  gap: 20px;
+  box-shadow: 0 6px 32px rgba(47,181,210,0.10);
+  transition: box-shadow 0.25s cubic-bezier(.4,0,.2,1), transform 0.25s cubic-bezier(.4,0,.2,1);
 }
 
 .stat-card:hover {
-  border-color: var(--accent-primary);
-  transform: translateY(-2px);
+  box-shadow: 0 12px 48px rgba(47,181,210,0.18);
+  transform: translateY(-4px) scale(1.03);
 }
 
 .stat-icon {
@@ -310,9 +311,11 @@ body {
 }
 
 .stat-value {
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--text-primary);
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--accent-primary);
+  letter-spacing: 0.03em;
+  text-shadow: 0 2px 8px rgba(47,181,210,0.10);
 }
 
 /* Recent Section */
@@ -567,61 +570,78 @@ body {
 
 /* Button Styles */
 .btn {
-  padding: 12px 24px;
+  padding: 12px 28px;
   border: none;
-  border-radius: var(--border-radius-sm);
-  font-size: 14px;
-  font-weight: 500;
+  border-radius: 24px;
+  font-size: 15px;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(.4,0,.2,1);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
+  box-shadow: 0 2px 8px rgba(47,181,210,0.08);
+  letter-spacing: 0.02em;
 }
 
 .btn-primary {
-  background: var(--accent-primary);
-  color: white;
+  background: linear-gradient(90deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(47,181,210,0.12);
+  border: none;
 }
 
 .btn-primary:hover {
-  background: var(--accent-secondary);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
+  background: linear-gradient(90deg, var(--accent-secondary) 0%, var(--accent-primary) 100%);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 8px 24px rgba(47,181,210,0.18);
 }
 
 .btn-secondary {
   background: var(--bg-tertiary);
-  color: var(--text-primary);
-  border: 1px solid var(--border-color);
+  color: var(--accent-primary);
+  border: 1px solid var(--accent-primary);
+  box-shadow: 0 2px 8px rgba(47,181,210,0.06);
 }
 
 .btn-secondary:hover {
   background: var(--bg-hover);
+  color: #fff;
+  border-color: var(--accent-secondary);
 }
 
 .btn-danger {
-  background: var(--accent-danger);
-  color: white;
-  padding: 8px 16px;
-  font-size: 13px;
+  background: linear-gradient(90deg, #ff0000 0%, #f59e0b 100%);
+  color: #fff;
+  padding: 10px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  box-shadow: 0 2px 8px rgba(255,0,0,0.08);
 }
 
 .btn-danger:hover {
-  background: #cc0000;
+  background: linear-gradient(90deg, #f59e0b 0%, #ff0000 100%);
+  transform: scale(1.04);
+  box-shadow: 0 8px 24px rgba(255,0,0,0.18);
 }
 
 /* Added edit button styles */
 .btn-edit {
-  background: var(--accent-primary);
-  color: white;
-  padding: 8px 16px;
-  font-size: 13px;
+  background: linear-gradient(90deg, #1a8fa8 0%, #2fb5d2 100%);
+  color: #fff;
+  padding: 10px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  box-shadow: 0 2px 8px rgba(47,181,210,0.08);
 }
 
 .btn-edit:hover {
-  background: var(--accent-secondary);
+  background: linear-gradient(90deg, #2fb5d2 0%, #1a8fa8 100%);
+  transform: scale(1.04);
+  box-shadow: 0 8px 24px rgba(47,181,210,0.18);
 }
 
 /* List Card */
@@ -684,36 +704,42 @@ body {
 /* Table Styles */
 .table-container {
   overflow-x: auto;
-  border-radius: var(--border-radius-sm);
-  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  border: none;
+  box-shadow: 0 2px 16px rgba(47,181,210,0.08);
 }
 
 .data-table {
   width: 100%;
-  border-collapse: collapse;
-  background: var(--bg-tertiary);
+  border-collapse: separate;
+  border-spacing: 0;
+  background: linear-gradient(90deg, var(--bg-tertiary) 80%, var(--bg-secondary) 100%);
+  border-radius: 18px;
+  overflow: hidden;
 }
 
 .data-table thead {
-  background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border-color);
+  background: linear-gradient(90deg, var(--bg-secondary) 80%, var(--bg-tertiary) 100%);
 }
 
 .data-table th {
-  padding: 16px;
+  padding: 18px 16px;
   text-align: left;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-secondary);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--accent-primary);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.08em;
+  border-bottom: 2px solid var(--accent-primary);
 }
 
 .data-table td {
-  padding: 16px;
-  font-size: 14px;
+  padding: 18px 16px;
+  font-size: 15px;
   color: var(--text-primary);
   border-bottom: 1px solid var(--border-color);
+  font-weight: 500;
+  background: rgba(47,181,210,0.03);
 }
 
 .data-table tbody tr:last-child td {
@@ -722,6 +748,7 @@ body {
 
 .data-table tbody tr:hover {
   background: var(--bg-hover);
+  transition: background 0.2s;
 }
 
 .empty-state {
@@ -911,7 +938,7 @@ body {
 
 .checkbox-label:hover {
   border-color: var(--accent-primary);
-  background: var(--bg-hover);
+  background: linear-gradient(90deg, var(--bg-hover) 80%, var(--bg-tertiary) 100%);
 }
 
 .checkbox-label input[type="checkbox"] {
@@ -1083,6 +1110,99 @@ body {
   .image-preview-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+}
+
+/* Cash Management Styles */
+.cash-tab-content {
+  display: none;
+}
+
+.cash-tab-content.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Modern Chart Container */
+.chart-container {
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 32px;
+  margin-bottom: 32px;
+  box-shadow: var(--shadow-lg);
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.chart-header h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.chart-header h3::before {
+  content: '';
+  width: 4px;
+  height: 24px;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  border-radius: 2px;
+}
+
+.chart-controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.chart-select {
+  padding: 8px 16px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  color: var(--text-primary);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.chart-select:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(47, 181, 210, 0.1);
+}
+
+.chart-wrapper {
+  position: relative;
+  height: 400px;
+  margin-bottom: 20px;
+  background: var(--bg-primary);
+  border-radius: var(--border-radius-sm);
+  padding: 20px;
+  border: 1px solid rgba(47, 181, 210, 0.1);
+}
+
+#cashChart {
+  max-width: 100%;
+  height: 100% !important;
+}
+
+.profit-positive {
+  color: #10b981 !important;
+}
+
+.profit-negative {
+  color: var(--accent-danger) !important;
 }
 
 /* Scrollbar Styles */

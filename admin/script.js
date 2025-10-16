@@ -11,6 +11,8 @@ class DataStore {
 
     if (this.orders.length === 0) {
       this.initializeSampleOrders()
+    } else {
+      this.initializeSampleCustomers()
     }
   }
 
@@ -191,6 +193,7 @@ class DataStore {
         price: 1250.0,
         paymentStatus: "paid",
         orderStatus: "delivered",
+        customerId: 1
       },
       {
         id: Date.now() - 4000,
@@ -200,6 +203,7 @@ class DataStore {
         price: 450.0,
         paymentStatus: "paid",
         orderStatus: "shipped",
+        customerId: 2
       },
       {
         id: Date.now() - 3000,
@@ -209,6 +213,7 @@ class DataStore {
         price: 320.0,
         paymentStatus: "pending",
         orderStatus: "preparing",
+        customerId: 3
       },
       {
         id: Date.now() - 2000,
@@ -218,6 +223,7 @@ class DataStore {
         price: 3500.0,
         paymentStatus: "paid",
         orderStatus: "preparing",
+        customerId: 1
       },
       {
         id: Date.now() - 1000,
@@ -227,15 +233,263 @@ class DataStore {
         price: 180.0,
         paymentStatus: "failed",
         orderStatus: "preparing",
+        customerId: 4
       },
     ]
 
     this.orders = sampleOrders
     this.save("orders", this.orders)
+    
+    // Örnek müşteri verilerini de ekle
+    this.initializeSampleCustomers()
+  }
+
+  initializeSampleCustomers() {
+    const customers = this.load("customers")
+    if (!customers || customers.length === 0) {
+      const sampleCustomers = [
+        {
+          id: 1,
+          firstName: "Ahmet",
+          lastName: "Yılmaz",
+          phone: "0532 123 45 67",
+          email: "ahmet.yilmaz@email.com",
+          address: "Atatürk Mah. Cumhuriyet Cad. No:15 Kadıköy/İstanbul",
+          registrationDate: "2024-01-10",
+          totalOrders: 2,
+          totalSpent: 4750.0
+        },
+        {
+          id: 2,
+          firstName: "Fatma",
+          lastName: "Demir",
+          phone: "0541 987 65 43",
+          email: "fatma.demir@email.com",
+          address: "Bahçelievler Mah. İnönü Sok. No:8 Ankara",
+          registrationDate: "2024-01-12",
+          totalOrders: 1,
+          totalSpent: 450.0
+        },
+        {
+          id: 3,
+          firstName: "Mehmet",
+          lastName: "Kaya",
+          phone: "0555 111 22 33",
+          email: "mehmet.kaya@email.com",
+          address: "Çankaya Mah. Atatürk Bulvarı No:45 İzmir",
+          registrationDate: "2024-01-14",
+          totalOrders: 1,
+          totalSpent: 320.0
+        },
+        {
+          id: 4,
+          firstName: "Ayşe",
+          lastName: "Özkan",
+          phone: "0533 444 55 66",
+          email: "ayse.ozkan@email.com",
+          address: "Merkez Mah. Gazi Cad. No:23 Bursa",
+          registrationDate: "2024-01-16",
+          totalOrders: 1,
+          totalSpent: 180.0
+        },
+        {
+          id: 5,
+          firstName: "Ali",
+          lastName: "Çelik",
+          phone: "0544 777 88 99",
+          email: "ali.celik@email.com",
+          address: "Yenişehir Mah. Barış Sok. No:12 Antalya",
+          registrationDate: "2024-01-18",
+          totalOrders: 0,
+          totalSpent: 0.0
+        }
+      ]
+      
+      this.save("customers", sampleCustomers)
+    }
+  }
+
+  // Müşteri yönetimi metodları
+  getCustomers() {
+    return this.load("customers") || []
+  }
+
+  getCustomerById(id) {
+    const customers = this.getCustomers()
+    return customers.find(c => c.id === Number.parseInt(id))
+  }
+
+  getCustomerOrders(customerId) {
+    return this.orders.filter(order => order.customerId === Number.parseInt(customerId))
+  }
+
+  deleteCustomer(id) {
+    const customers = this.getCustomers().filter(c => c.id !== Number.parseInt(id))
+    this.save("customers", customers)
+  }
+
+  // Cash Management Methods
+  addIncome(incomeData) {
+    const income = { id: Date.now(), type: 'income', ...incomeData }
+    const incomes = this.load('incomes') || []
+    incomes.push(income)
+    this.save('incomes', incomes)
+    return income
+  }
+
+  addExpense(expenseData) {
+    const expense = { id: Date.now(), type: 'expense', ...expenseData }
+    const expenses = this.load('expenses') || []
+    expenses.push(expense)
+    this.save('expenses', expenses)
+    return expense
+  }
+
+  getIncomes() {
+    return this.load('incomes') || []
+  }
+
+  getExpenses() {
+    return this.load('expenses') || []
+  }
+
+  deleteIncome(id) {
+    const incomes = this.getIncomes().filter(i => i.id !== id)
+    this.save('incomes', incomes)
+  }
+
+  deleteExpense(id) {
+    const expenses = this.getExpenses().filter(e => e.id !== id)
+    this.save('expenses', expenses)
+  }
+
+  getTotalIncome() {
+    return this.getIncomes().reduce((total, income) => total + income.amount, 0)
+  }
+
+  getTotalExpense() {
+    return this.getExpenses().reduce((total, expense) => total + expense.amount, 0)
+  }
+
+  getNetProfit() {
+    return this.getTotalIncome() - this.getTotalExpense()
   }
 }
 
 const store = new DataStore()
+
+// Müşteri listesi render fonksiyonu
+function renderCustomersList() {
+  const customers = store.getCustomers()
+  const tbody = document.getElementById("customers-list-table")
+  
+  if (customers.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="4" class="empty-state">Henüz müşteri kaydı yok</td></tr>'
+    return
+  }
+  
+  tbody.innerHTML = customers.map(customer => `
+    <tr>
+      <td>${customer.firstName} ${customer.lastName}</td>
+      <td>${customer.phone}</td>
+      <td>${customer.email}</td>
+      <td>
+        <button class="btn btn-edit" onclick="viewCustomerDetail(${customer.id})">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M8 2C4.686 2 2 4.686 2 8s2.686 6 6 6 6-2.686 6-6-2.686-6-6-6zm0 10c-2.206 0-4-1.794-4-4s1.794-4 4-4 4 1.794 4 4-1.794 4-4 4z" fill="currentColor"/>
+            <path d="M8 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" fill="currentColor"/>
+          </svg>
+          Detay
+        </button>
+        <button class="btn btn-danger" onclick="deleteCustomer(${customer.id})" style="margin-left: 8px;">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 1.152l.557 10.056A2 2 0 0 0 5.046 16h5.908a2 2 0 0 0 1.993-1.792l.557-10.056a.58.58 0 0 0-.01-1.152H11Z" fill="currentColor"/>
+          </svg>
+          Sil
+        </button>
+      </td>
+    </tr>
+  `).join('')
+}
+
+// Müşteri detayını göster
+function viewCustomerDetail(customerId) {
+  const customer = store.getCustomerById(customerId)
+  const customerOrders = store.getCustomerOrders(customerId)
+  
+  if (!customer) {
+    alert('Müşteri bulunamadı!')
+    return
+  }
+  
+  const content = document.getElementById('customer-detail-content')
+  
+  const ordersHtml = customerOrders.length > 0 ? 
+    customerOrders.map(order => `
+      <div class="order-detail-row">
+        <span class="order-detail-label">${order.orderNumber}</span>
+        <span class="order-detail-value">${order.productName} - ₺${order.price.toFixed(2)}</span>
+      </div>
+    `).join('') : 
+    '<div class="order-detail-row"><span class="order-detail-value">Henüz sipariş yok</span></div>'
+  
+  content.innerHTML = `
+    <div class="order-detail-row">
+      <span class="order-detail-label">Ad Soyad:</span>
+      <span class="order-detail-value">${customer.firstName} ${customer.lastName}</span>
+    </div>
+    <div class="order-detail-row">
+      <span class="order-detail-label">Telefon:</span>
+      <span class="order-detail-value">${customer.phone}</span>
+    </div>
+    <div class="order-detail-row">
+      <span class="order-detail-label">E-posta:</span>
+      <span class="order-detail-value">${customer.email}</span>
+    </div>
+    <div class="order-detail-row">
+      <span class="order-detail-label">Adres:</span>
+      <span class="order-detail-value">${customer.address}</span>
+    </div>
+    <div class="order-detail-row">
+      <span class="order-detail-label">Kayıt Tarihi:</span>
+      <span class="order-detail-value">${customer.registrationDate}</span>
+    </div>
+    <div class="order-detail-row">
+      <span class="order-detail-label">Toplam Sipariş:</span>
+      <span class="order-detail-value">${customer.totalOrders} adet</span>
+    </div>
+    <div class="order-detail-row">
+      <span class="order-detail-label">Toplam Harcama:</span>
+      <span class="order-detail-value">₺${customer.totalSpent.toFixed(2)}</span>
+    </div>
+    <div class="order-detail-row" style="margin-top: 20px; padding-top: 20px; border-top: 2px solid var(--border-color);">
+      <span class="order-detail-label" style="font-size: 16px; font-weight: 600;">Sipariş Edilen Ürünler:</span>
+    </div>
+    ${ordersHtml}
+  `
+  
+  document.getElementById('customer-detail-modal').classList.add('active')
+}
+
+// Müşteri detay modalını kapat
+function closeCustomerDetailModal() {
+  document.getElementById('customer-detail-modal').classList.remove('active')
+}
+
+// Müşteri sil
+function deleteCustomer(customerId) {
+  const customer = store.getCustomerById(customerId)
+  if (!customer) {
+    alert('Müşteri bulunamadı!')
+    return
+  }
+  
+  if (confirm(`${customer.firstName} ${customer.lastName} adlı müşteriyi silmek istediğinizden emin misiniz?`)) {
+    store.deleteCustomer(customerId)
+    renderCustomersList()
+    alert('Müşteri başarıyla silindi!')
+  }
+}
 
 let productImages = []
 let editProductImages = []
@@ -264,6 +518,10 @@ document.querySelectorAll(".nav-item").forEach((item) => {
         renderStockManagement()
       } else if (page === "orders") {
         renderOrdersList()
+      } else if (page === "cash-management") {
+        renderCashManagement()
+      } else if (page === "customers") {
+        renderCustomersList()
       }
     })
   }
@@ -1711,3 +1969,332 @@ document.getElementById("order-edit-modal").addEventListener("click", (e) => {
 // Initialize
 updateDashboard()
 renderAllCategories()
+
+// Cash Management Variables
+let cashChart = null
+
+// Cash Management Tab Functionality
+document.addEventListener('DOMContentLoaded', function() {
+  // Cash tab switching
+  document.querySelectorAll('[data-cash-tab]').forEach(btn => {
+    if (btn.tagName === 'BUTTON') {
+      btn.addEventListener('click', () => {
+        const tab = btn.dataset.cashTab
+        
+        document.querySelectorAll('[data-cash-tab]').forEach(b => {
+          if (b.tagName === 'BUTTON') b.classList.remove('active')
+        })
+        btn.classList.add('active')
+        
+        document.querySelectorAll('.cash-tab-content').forEach(content => {
+          content.classList.remove('active')
+        })
+        document.querySelector(`.cash-tab-content[data-cash-tab="${tab}"]`).classList.add('active')
+      })
+    }
+  })
+
+  // Set default dates
+  const today = new Date().toISOString().split('T')[0]
+  document.getElementById('income-date').value = today
+  document.getElementById('expense-date').value = today
+})
+
+// Income Form
+document.getElementById('income-form').addEventListener('submit', (e) => {
+  e.preventDefault()
+  
+  const incomeData = {
+    description: document.getElementById('income-description').value.trim(),
+    amount: parseFloat(document.getElementById('income-amount').value),
+    category: document.getElementById('income-category').value,
+    date: document.getElementById('income-date').value
+  }
+  
+  store.addIncome(incomeData)
+  document.getElementById('income-form').reset()
+  document.getElementById('income-date').value = new Date().toISOString().split('T')[0]
+  
+  renderIncomeList()
+  updateCashSummary()
+  updateCashChart()
+  
+  alert('Gelir başarıyla eklendi!')
+})
+
+// Expense Form
+document.getElementById('expense-form').addEventListener('submit', (e) => {
+  e.preventDefault()
+  
+  const expenseData = {
+    description: document.getElementById('expense-description').value.trim(),
+    amount: parseFloat(document.getElementById('expense-amount').value),
+    category: document.getElementById('expense-category').value,
+    date: document.getElementById('expense-date').value
+  }
+  
+  store.addExpense(expenseData)
+  document.getElementById('expense-form').reset()
+  document.getElementById('expense-date').value = new Date().toISOString().split('T')[0]
+  
+  renderExpenseList()
+  updateCashSummary()
+  updateCashChart()
+  
+  alert('Gider başarıyla eklendi!')
+})
+
+// Render Cash Management Page
+function renderCashManagement() {
+  updateCashSummary()
+  renderIncomeList()
+  renderExpenseList()
+  updateCashChart()
+}
+
+// Update Cash Summary
+function updateCashSummary() {
+  const totalIncome = store.getTotalIncome()
+  const totalExpense = store.getTotalExpense()
+  const netProfit = store.getNetProfit()
+  
+  document.getElementById('total-income').textContent = `₺${totalIncome.toLocaleString('tr-TR', {minimumFractionDigits: 2})}`
+  document.getElementById('total-expense').textContent = `₺${totalExpense.toLocaleString('tr-TR', {minimumFractionDigits: 2})}`
+  
+  const netProfitElement = document.getElementById('net-profit')
+  netProfitElement.textContent = `₺${netProfit.toLocaleString('tr-TR', {minimumFractionDigits: 2})}`
+  
+  if (netProfit >= 0) {
+    netProfitElement.classList.remove('profit-negative')
+    netProfitElement.classList.add('profit-positive')
+  } else {
+    netProfitElement.classList.remove('profit-positive')
+    netProfitElement.classList.add('profit-negative')
+  }
+}
+
+// Render Income List
+function renderIncomeList() {
+  const incomes = store.getIncomes().sort((a, b) => new Date(b.date) - new Date(a.date))
+  const tbody = document.getElementById('income-list')
+  
+  if (incomes.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="5" class="empty-state">Henüz gelir eklenmemiş</td></tr>'
+    return
+  }
+  
+  tbody.innerHTML = incomes.map(income => `
+    <tr>
+      <td>${new Date(income.date).toLocaleDateString('tr-TR')}</td>
+      <td>${income.description}</td>
+      <td>${getCategoryName(income.category, 'income')}</td>
+      <td>₺${income.amount.toLocaleString('tr-TR', {minimumFractionDigits: 2})}</td>
+      <td>
+        <button class="btn btn-danger" onclick="deleteIncome(${income.id})">Sil</button>
+      </td>
+    </tr>
+  `).join('')
+}
+
+// Render Expense List
+function renderExpenseList() {
+  const expenses = store.getExpenses().sort((a, b) => new Date(b.date) - new Date(a.date))
+  const tbody = document.getElementById('expense-list')
+  
+  if (expenses.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="5" class="empty-state">Henüz gider eklenmemiş</td></tr>'
+    return
+  }
+  
+  tbody.innerHTML = expenses.map(expense => `
+    <tr>
+      <td>${new Date(expense.date).toLocaleDateString('tr-TR')}</td>
+      <td>${expense.description}</td>
+      <td>${getCategoryName(expense.category, 'expense')}</td>
+      <td>₺${expense.amount.toLocaleString('tr-TR', {minimumFractionDigits: 2})}</td>
+      <td>
+        <button class="btn btn-danger" onclick="deleteExpense(${expense.id})">Sil</button>
+      </td>
+    </tr>
+  `).join('')
+}
+
+// Get Category Name
+function getCategoryName(category, type) {
+  const categories = {
+    income: {
+      sales: 'Satış',
+      service: 'Hizmet',
+      other: 'Diğer'
+    },
+    expense: {
+      rent: 'Kira',
+      utilities: 'Faturalar',
+      supplies: 'Malzeme',
+      marketing: 'Pazarlama',
+      other: 'Diğer'
+    }
+  }
+  
+  return categories[type][category] || category
+}
+
+// Delete Income
+function deleteIncome(id) {
+  if (confirm('Bu gelir kaydını silmek istediğinizden emin misiniz?')) {
+    store.deleteIncome(id)
+    renderIncomeList()
+    updateCashSummary()
+    updateCashChart()
+  }
+}
+
+// Delete Expense
+function deleteExpense(id) {
+  if (confirm('Bu gider kaydını silmek istediğinizden emin misiniz?')) {
+    store.deleteExpense(id)
+    renderExpenseList()
+    updateCashSummary()
+    updateCashChart()
+  }
+}
+
+// Update Cash Chart
+function updateCashChart() {
+  const ctx = document.getElementById('cashChart')
+  if (!ctx) return
+
+  const incomes = store.getIncomes()
+  const expenses = store.getExpenses()
+
+  // Group by month
+  const monthlyData = {}
+
+  incomes.forEach(income => {
+    const month = income.date.substring(0, 7) // YYYY-MM
+    if (!monthlyData[month]) {
+      monthlyData[month] = { income: 0, expense: 0 }
+    }
+    monthlyData[month].income += income.amount
+  })
+
+  expenses.forEach(expense => {
+    const month = expense.date.substring(0, 7) // YYYY-MM
+    if (!monthlyData[month]) {
+      monthlyData[month] = { income: 0, expense: 0 }
+    }
+    monthlyData[month].expense += expense.amount
+  })
+
+  const sortedMonths = Object.keys(monthlyData).sort()
+  const labels = sortedMonths.map(month => {
+    const [year, monthNum] = month.split('-')
+    const monthNames = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara']
+    return `${monthNames[parseInt(monthNum) - 1]} ${year}`
+  })
+
+  const incomeData = sortedMonths.map(month => monthlyData[month].income)
+  const expenseData = sortedMonths.map(month => monthlyData[month].expense)
+  const netProfitData = sortedMonths.map(month => monthlyData[month].income - monthlyData[month].expense)
+
+  if (cashChart) {
+    cashChart.destroy()
+  }
+
+  cashChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Gelir',
+          data: incomeData,
+          backgroundColor: 'rgba(47, 181, 210, 0.6)',
+          borderColor: 'rgba(47, 181, 210, 1)',
+          borderWidth: 1,
+          order: 2,
+        },
+        {
+          label: 'Gider',
+          data: expenseData,
+          backgroundColor: 'rgba(255, 0, 0, 0.6)',
+          borderColor: 'rgba(255, 0, 0, 1)',
+          borderWidth: 1,
+          order: 2,
+        },
+        {
+          label: 'Net Kar',
+          data: netProfitData,
+          type: 'line',
+          borderColor: '#f59e0b',
+          backgroundColor: 'rgba(245, 158, 11, 0.1)',
+          tension: 0.4,
+          fill: true,
+          order: 1,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: {
+        mode: 'index',
+        intersect: false,
+      },
+      plugins: {
+        legend: {
+          position: 'top',
+          labels: {
+            color: '#ffffff',
+            font: {
+              size: 14,
+            },
+          },
+        },
+        tooltip: {
+          backgroundColor: '#0a0a0a',
+          titleColor: '#ffffff',
+          bodyColor: '#a0a0a0',
+          borderColor: '#3a3a38',
+          borderWidth: 1,
+          padding: 12,
+          callbacks: {
+            label: function (context) {
+              let label = context.dataset.label || ''
+              if (label) {
+                label += ': '
+              }
+              if (context.parsed.y !== null) {
+                label += new Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY' }).format(context.parsed.y)
+              }
+              return label
+            },
+          },
+        },
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: {
+            color: '#a0a0a0',
+            callback: function (value) {
+              return '₺' + value.toLocaleString('tr-TR')
+            },
+          },
+          grid: {
+            color: '#3a3a38',
+            drawBorder: false,
+          },
+        },
+        x: {
+          ticks: {
+            color: '#a0a0a0',
+          },
+          grid: {
+            display: false,
+          },
+        },
+      },
+    },
+  })
+}
