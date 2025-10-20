@@ -57,18 +57,18 @@ class NewProductsSlider {
                 badge: "Premium"
             },
             {
-                id: 5,
-                title: "Porsche 911 Turbo Side Mirrors",
-                price: 2100.00,
-                image: "/images/new-p5.jpeg",
+                id: 6,
+                title: "Porsche Cayenne Turbo Wheels",
+                price: 1800.00,
+                image: "/images/new-p6.jpeg",
                 badge: "Premium"
             },
             {
-                id: 5,
-                title: "Porsche 911 Turbo Side Mirrors",
-                price: 2100.00,
-                image: "/images/new-p5.jpeg",
-                badge: "Premium"
+                id: 7,
+                title: "Audi Q7 S-Line Roof Rails",
+                price: 650.00,
+                image: "/images/new-p7.jpeg",
+                badge: "New"
             }
         ];
     }
@@ -90,13 +90,13 @@ class NewProductsSlider {
         this.products.forEach(product => {
             const productCard = document.createElement('div');
             productCard.classList.add('product-card');
+            productCard.style.cursor = 'pointer';
+            productCard.dataset.productId = product.id;
             productCard.innerHTML = `
-                <a href="product-single-page.html?id=${product.id}" class="product-image-link">
-                    <div class="product-image">
-                        <img src="${product.image}" alt="${product.title}">
-                        <span class="product-badge">${product.badge}</span>
-                    </div>
-                </a>
+                <div class="product-image">
+                    <img src="${product.image}" alt="${product.title}">
+                    <span class="product-badge">${product.badge}</span>
+                </div>
                 <div class="product-info">
                     <h3 class="product-title">${product.title}</h3>
                     <p class="product-price">${product.price.toFixed(2)} <span class="currency">€</span></p>
@@ -108,6 +108,18 @@ class NewProductsSlider {
                 </div>
             `;
             this.slider.appendChild(productCard);
+        });
+
+        this.slider.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                if (e.target.closest('.btn-add-cart')) {
+                    return;
+                }
+                const productId = card.dataset.productId;
+                if (productId) {
+                    window.location.href = `product-single-page.html?id=${productId}`;
+                }
+            });
         });
         
         // Add event listeners for add to cart buttons

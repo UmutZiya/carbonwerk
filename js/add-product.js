@@ -668,9 +668,26 @@ function updateCartDropdown() {
 
 // Remove item from cart
 function removeFromCart(index) {
+    // Animasyonlu silme için cart-item'ı bul
+    const cartItemsContainer = document.getElementById('cartItems');
+    if (cartItemsContainer) {
+        const cartItem = cartItemsContainer.querySelectorAll('.cart-item')[index];
+        if (cartItem) {
+            cartItem.classList.add('removing');
+            setTimeout(() => {
+                cart.splice(index, 1);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartDisplay();
+                updateCartDropdown && updateCartDropdown();
+            }, 300); // CSS animasyon süresiyle uyumlu
+            return;
+        }
+    }
+    // Fallback: animasyon yoksa direkt sil
     cart.splice(index, 1);
     localStorage.setItem('cart', JSON.stringify(cart));
     updateCartDisplay();
+    updateCartDropdown && updateCartDropdown();
 }
 
 // Clear entire cart

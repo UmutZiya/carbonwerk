@@ -52,23 +52,35 @@ function updateProductDetails(product) {
         if (el) el.textContent = product.badge || 'NEW';
     });
     
+    // Ensure product.images is an array, fallback to single image if not present
+    if (!product.images || !Array.isArray(product.images) || product.images.length === 0) {
+        product.images = [product.image];
+    }
+
     // Update main product image
-    const mainImages = document.querySelectorAll('#mainProductImage');
-    mainImages.forEach(img => {
-        if (img) {
-            img.src = product.image;
-            img.alt = product.name;
-        }
-    });
-    
-    // Update thumbnail images
-    const thumbnails = document.querySelectorAll('.thumbnail');
-    thumbnails.forEach(thumb => {
-        if (thumb) {
-            thumb.src = product.image;
+    const mainImageElement = document.getElementById('mainProductImage');
+    if (mainImageElement) {
+        mainImageElement.src = product.images[0];
+        mainImageElement.alt = product.name;
+        mainImageElement.onclick = () => openLightbox(0); // Open lightbox on main image click
+    }
+
+    // Update thumbnail images (no click, only for slider)
+    const thumbnailContainer = document.querySelector('.thumbnail-container');
+    if (thumbnailContainer) {
+        thumbnailContainer.innerHTML = '';
+        product.images.forEach((imgSrc, index) => {
+            const thumb = document.createElement('img');
+            thumb.src = imgSrc;
             thumb.alt = product.name;
-        }
-    });
+            thumb.classList.add('thumbnail');
+            if (index === 0) {
+                thumb.classList.add('active');
+            }
+            // No click event, only navigation with arrows
+            thumbnailContainer.appendChild(thumb);
+        });
+    }
     
     // Update breadcrumb
     if (product.breadcrumb) {
@@ -108,3 +120,119 @@ function updateProductDetails(product) {
         }
     }
 }
+
+// Lightbox functionality
+let slideIndex = 0;
+let productImages = []; // This will store all product image URLs
+
+
+// Slider navigation for thumbnails and main image
+window.thumbnailSliderIndex = 0;
+window.updateThumbnailSlider = function() {
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    const mainProductImage = document.getElementById('mainProductImage');
+    if (!thumbnails.length) return;
+    // Clamp index
+    if (window.thumbnailSliderIndex < 0) window.thumbnailSliderIndex = 0;
+    if (window.thumbnailSliderIndex >= thumbnails.length) window.thumbnailSliderIndex = thumbnails.length - 1;
+    // Update main image
+    if (mainProductImage) {
+        mainProductImage.src = thumbnails[window.thumbnailSliderIndex].src;
+        mainProductImage.alt = thumbnails[window.thumbnailSliderIndex].alt;
+    }
+    // Update active class
+    thumbnails.forEach((thumb, idx) => {
+        if (idx === window.thumbnailSliderIndex) {
+            thumb.classList.add('active');
+            thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        } else {
+            thumb.classList.remove('active');
+        }
+    });
+};
+
+window.previousImage = function() {
+    window.thumbnailSliderIndex--;
+    if (window.thumbnailSliderIndex < 0) window.thumbnailSliderIndex = 0;
+    window.updateThumbnailSlider();
+};
+
+window.nextImage = function() {
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    window.thumbnailSliderIndex++;
+    if (window.thumbnailSliderIndex >= thumbnails.length) window.thumbnailSliderIndex = thumbnails.length - 1;
+    window.updateThumbnailSlider();
+};
+
+// Scroll thumbnails left/right (for overflow)
+window.scrollThumbnails = function(direction) {
+    const container = document.querySelector('.thumbnail-container');
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    if (!container || !thumbnails.length) return;
+    const scrollAmount = 100;
+    if (direction === 'left') {
+        container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        window.thumbnailSliderIndex--;
+        if (window.thumbnailSliderIndex < 0) window.thumbnailSliderIndex = 0;
+    } else {
+        container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        window.thumbnailSliderIndex++;
+        if (window.thumbnailSliderIndex >= thumbnails.length) window.thumbnailSliderIndex = thumbnails.length - 1;
+    }
+    window.updateThumbnailSlider();
+};
+
+function openLightbox(n) {
+    // Populate productImages from current thumbnails
+    productImages = Array.from(document.querySelectorAll('.thumbnail')).map(img => img.src);
+    if (productImages.length > 0) {
+        document.getElementById("productLightbox").style.display = "block";
+        showSlides(n);
+        // Modal oklarına event ekle (her açılışta güncel olsun)
+        const prevBtn = document.querySelector('.prev-lightbox');
+        const nextBtn = document.querySelector('.next-lightbox');
+        if (prevBtn) prevBtn.onclick = function(e) { e.stopPropagation(); plusSlides(-1); };
+        if (nextBtn) nextBtn.onclick = function(e) { e.stopPropagation(); plusSlides(1); };
+        // Kapatma için modal arka planına tıklama
+        const modal = document.getElementById("productLightbox");
+        if (modal) {
+            modal.onclick = function(e) {
+                if (e.target === modal) closeLightbox();
+            };
+        }
+    }
+}
+
+function closeLightbox() {
+    document.getElementById("productLightbox").style.display = "none";
+}
+
+
+function plusSlides(n) {
+    showSlides(slideIndex + n);
+}
+
+function showSlides(n) {
+    if (productImages.length === 0) return;
+    if (n >= productImages.length) { slideIndex = 0; }
+    else if (n < 0) { slideIndex = productImages.length - 1; }
+    else { slideIndex = n; }
+    document.getElementById("lightboxImage").src = productImages[slideIndex];
+}
+
+
+// Add event listener to main image to open lightbox and initialize slider index
+document.addEventListener('DOMContentLoaded', () => {
+    const mainProductImage = document.getElementById('mainProductImage');
+    if (mainProductImage) {
+        mainProductImage.style.cursor = 'pointer';
+        mainProductImage.addEventListener('click', () => openLightbox(window.thumbnailSliderIndex));
+    }
+    // Set initial main image and active thumbnail
+    setTimeout(() => {
+        window.thumbnailSliderIndex = 0;
+        window.updateThumbnailSlider();
+    }, 300);
+});
+
+

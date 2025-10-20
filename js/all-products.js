@@ -308,9 +308,6 @@ function displayProducts(products) {
                     <button class="btn-add-cart" onclick="addToCart(${product.id})">
                         <i class="fas fa-shopping-cart"></i> Add to Cart
                     </button>
-                    <button class="btn-wishlist" onclick="addToWishlist(${product.id})">
-                        <i class="far fa-heart"></i>
-                    </button>
                 </div>
             </div>
         </div>

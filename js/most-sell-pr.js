@@ -92,13 +92,13 @@ document.addEventListener('DOMContentLoaded', function() {
         mostSellingProducts.forEach((product, index) => {
             const card = document.createElement('div');
             card.className = 'most-selling-card';
+            card.style.cursor = 'pointer';
+            card.dataset.productId = product.id;
             card.innerHTML = `
-                <a href="product-single-page.html?id=${product.id}" class="product-image-link">
-                    <div class="product-image">
-                        <img src="${product.image}" alt="${product.title}" loading="lazy">
-                        <div class="product-badge">${product.badge}</div>
-                    </div>
-                </a>
+                <div class="product-image">
+                    <img src="${product.image}" alt="${product.title}" loading="lazy">
+                    <div class="product-badge">${product.badge}</div>
+                </div>
                 <div class="product-info">
                     <h3 class="product-title">${product.title}</h3>
                     <div class="product-price">
@@ -113,6 +113,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             `;
             slider.appendChild(card);
+        });
+
+        slider.querySelectorAll('.most-selling-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                if (e.target.closest('.btn-add-cart')) {
+                    return;
+                }
+                const productId = card.dataset.productId;
+                if (productId) {
+                    window.location.href = `product-single-page.html?id=${productId}`;
+                }
+            });
         });
         
         // Add event listeners for add to cart buttons

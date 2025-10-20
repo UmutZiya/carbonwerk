@@ -802,6 +802,103 @@
     margin: 0;
 }
 
+/* Image Lightbox Modal */
+
+.lightbox-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.92);
+    padding: 0;
+    overflow: auto;
+    transition: background 0.3s;
+}
+
+.lightbox-content {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90vw;
+    max-width: 900px;
+    height: 90vh;
+    position: relative;
+}
+
+.lightbox-content img {
+    max-width: 80vw;
+    max-height: 80vh;
+    width: auto;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    background: #fff;
+}
+
+.lightbox-arrow {
+    background: none;
+    border: none;
+    outline: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.2s;
+    opacity: 1;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.lightbox-arrow svg {
+    display: block;
+}
+.lightbox-arrow:active {
+    background: rgba(0,0,0,0.05);
+}
+.lightbox-arrow.prev-lightbox {
+    left: 0;
+}
+.lightbox-arrow.next-lightbox {
+    right: 0;
+}
+.lightbox-arrow:hover svg circle {
+    fill: #eaeaea;
+}
+
+.close-lightbox {
+    position: absolute;
+    top: 24px;
+    right: 40px;
+    color: #222;
+    font-size: 44px;
+    font-weight: bold;
+    transition: color 0.2s;
+    cursor: pointer;
+    z-index: 10;
+    background: rgba(255,255,255,0.85);
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.close-lightbox:hover,
+.close-lightbox:focus {
+    color: #111;
+    background: #eaeaea;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .product-detail-section {
