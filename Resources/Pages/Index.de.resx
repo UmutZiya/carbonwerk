@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0</value></resheader>
+
+  <data name="NewProducts.Title" xml:space="preserve"><value>Neue Produkte</value></data>
+  <data name="NewProducts.Subtitle" xml:space="preserve"><value>Entdecken Sie unsere neuesten Automobilprodukte</value></data>
+
+  <data name="MostSelling.Title" xml:space="preserve"><value>Meistverkaufte Produkte dieses Monats</value></data>
+  <data name="MostSelling.Subtitle" xml:space="preserve"><value>Entdecken Sie unsere meistverkauften Automobilprodukte</value></data>
+
+  <data name="HowMade.Title" xml:space="preserve"><value>Wie werden unsere Produkte hergestellt?</value></data>
+  <data name="HowMade.Subtitle" xml:space="preserve"><value>Entdecken Sie unseren Herstellungsprozess</value></data>
+
+  <data name="News.Title" xml:space="preserve"><value>Neueste Nachrichten</value></data>
+  <data name="News.Subtitle" xml:space="preserve"><value>Bleiben Sie mit unseren neuesten Automobilnachrichten und Einblicken auf dem Laufenden</value></data>
+  <data name="News.ViewAll" xml:space="preserve"><value>Alle Nachrichten anzeigen</value></data>
+</root>

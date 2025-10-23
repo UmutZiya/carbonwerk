@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+
+  <data name="Footer.Information.Title" xml:space="preserve"><value>INFORMATIONEN</value></data>
+  <data name="Footer.Information.AboutUs" xml:space="preserve"><value>Über uns</value></data>
+  <data name="Footer.Information.ShopInfo" xml:space="preserve"><value>Shop-Informationen</value></data>
+  <data name="Footer.Information.Delivery" xml:space="preserve"><value>Lieferung</value></data>
+  <data name="Footer.Information.PaymentInfo" xml:space="preserve"><value>Zahlungsinformationen und Gebühren</value></data>
+
+  <data name="Footer.Contact.Title" xml:space="preserve"><value>KONTAKT</value></data>
+  <data name="Footer.Contact.Button" xml:space="preserve"><value>Kontaktieren Sie uns</value></data>
+
+  <data name="Footer.FollowUs.Title" xml:space="preserve"><value>FOLGE UNS</value></data>
+
+  <data name="Footer.PaymentMethods.Title" xml:space="preserve"><value>Unsere Zahlungsmethoden</value></data>
+  <data name="Footer.DeliveryMethods.Title" xml:space="preserve"><value>Unsere Liefermethoden</value></data>
+
+  <data name="Footer.Bottom.Privacy" xml:space="preserve"><value>Datenschutz</value></data>
+  <data name="Footer.Bottom.Terms" xml:space="preserve"><value>Nutzungsbedingungen</value></data>
+  <data name="Footer.Bottom.CopyrightSuffix" xml:space="preserve"><value>Alle Rechte vorbehalten.</value></data>
+</root>

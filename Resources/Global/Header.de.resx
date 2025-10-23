@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <data name="Header.Menu" xml:space="preserve"><value>Menü</value></data>
+  <data name="Header.SearchPlaceholder" xml:space="preserve"><value>Produkte suchen...</value></data>
+  <data name="Header.AllProducts" xml:space="preserve"><value>Alle Produkte</value></data>
+  <data name="Header.News" xml:space="preserve"><value>Nachrichten</value></data>
+  <data name="Header.Login" xml:space="preserve"><value>Anmelden</value></data>
+
+  <data name="Header.Wishlist" xml:space="preserve"><value>Wunschliste</value></data>
+  <data name="Header.Wishlist.ItemsLabel" xml:space="preserve"><value>Artikel</value></data>
+  <data name="Header.Wishlist.Empty" xml:space="preserve"><value>Ihre Wunschliste ist leer</value></data>
+  <data name="Header.Wishlist.View" xml:space="preserve"><value>Wunschliste anzeigen</value></data>
+
+  <data name="Header.ContinueShopping" xml:space="preserve"><value>Weiter einkaufen</value></data>
+
+  <data name="Header.Cart" xml:space="preserve"><value>Warenkorb</value></data>
+  <data name="Header.Cart.Empty" xml:space="preserve"><value>Ihr Warenkorb ist leer</value></data>
+  <data name="Header.Cart.View" xml:space="preserve"><value>Warenkorb anzeigen</value></data>
+  <data name="Header.Cart.Checkout" xml:space="preserve"><value>Zur Kasse</value></data>
+  <data name="Header.Cart.Total" xml:space="preserve"><value>Summe</value></data>
+
+  <data name="Header.Mobile.MenuTitle" xml:space="preserve"><value>Menü</value></data>
+  <data name="Header.Mobile.LoginButton" xml:space="preserve"><value>Anmelden</value></data>
+  <data name="Header.Mobile.FollowUs" xml:space="preserve"><value>Folge uns</value></data>
+
+  <data name="Language.EN" xml:space="preserve"><value>EN</value></data>
+  <data name="Language.DE" xml:space="preserve"><value>DE</value></data>
+  <data name="Language.TR" xml:space="preserve"><value>TR</value></data>
+</root>

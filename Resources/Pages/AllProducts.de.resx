@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0</value></resheader>
+
+  <data name="Page.Title" xml:space="preserve"><value>Alle Produkte</value></data>
+  <data name="Page.Subtitle" xml:space="preserve"><value>Entdecken Sie unser komplettes Sortiment an Automobilprodukten</value></data>
+
+  <data name="Filter.SelectBrand" xml:space="preserve"><value>Marke wählen</value></data>
+  <data name="Filter.SelectModel" xml:space="preserve"><value>Modell wählen</value></data>
+  <data name="Filter.SelectVersion" xml:space="preserve"><value>Version wählen</value></data>
+  <data name="Filter.SelectGeneration" xml:space="preserve"><value>Generation wählen</value></data>
+  <data name="Filter.SelectType" xml:space="preserve"><value>Typ wählen</value></data>
+  <data name="Filter.Clear" xml:space="preserve"><value>Löschen</value></data>
+  <data name="Filter.Search" xml:space="preserve"><value>Suchen</value></data>
+
+  <data name="Products.CountSuffix" xml:space="preserve"><value>Produkte gefunden</value></data>
+  <data name="NoProducts.Title" xml:space="preserve"><value>Keine Produkte gefunden</value></data>
+  <data name="NoProducts.Description" xml:space="preserve"><value>Es wurden keine Produkte gefunden. Bitte passen Sie Ihre Filter an.</value></data>
+</root>

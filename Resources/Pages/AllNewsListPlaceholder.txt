@@ -1,0 +1,1 @@
+Note: News card titles and summaries are dynamic and should be localized where the data is sourced (e.g., CMS or JSON).

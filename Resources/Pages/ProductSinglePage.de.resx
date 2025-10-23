@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0</value></resheader>
+
+  <data name="Breadcrumb.Home" xml:space="preserve"><value>Startseite</value></data>
+  <data name="Breadcrumb.Offer" xml:space="preserve"><value>Unser Angebot</value></data>
+
+  <data name="Product.Badge.New" xml:space="preserve"><value>NEU</value></data>
+  <data name="Product.Code.Label" xml:space="preserve"><value>Produktcode</value></data>
+  <data name="Product.Price.Unit" xml:space="preserve"><value>/ Stk.</value></data>
+  <data name="Product.NetPrice" xml:space="preserve"><value>Nettopreis</value></data>
+
+  <data name="Cart.Modal.Title" xml:space="preserve"><value>Warenkorb</value></data>
+  <data name="Cart.Modal.Continue" xml:space="preserve"><value>Weiter einkaufen</value></data>
+  <data name="Cart.Modal.Checkout" xml:space="preserve"><value>Zur Kasse</value></data>
+</root>

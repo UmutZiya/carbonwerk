@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0</value></resheader>
+
+  <data name="Tabs.Login" xml:space="preserve"><value>Anmelden</value></data>
+  <data name="Tabs.Register" xml:space="preserve"><value>Registrieren</value></data>
+
+  <data name="Login.Header.Title" xml:space="preserve"><value>Willkommen</value></data>
+  <data name="Login.Header.Subtitle" xml:space="preserve"><value>Melden Sie sich bei Ihrem Konto an</value></data>
+  <data name="Login.Username" xml:space="preserve"><value>Benutzername</value></data>
+  <data name="Login.Password" xml:space="preserve"><value>Passwort</value></data>
+  <data name="Login.ForgotPassword" xml:space="preserve"><value>Passwort vergessen</value></data>
+  <data name="Login.Submit" xml:space="preserve"><value>Anmelden</value></data>
+  <data name="Login.Or" xml:space="preserve"><value>Oder</value></data>
+  <data name="Login.Google" xml:space="preserve"><value>Mit Google anmelden</value></data>
+
+  <data name="Register.Header.Title" xml:space="preserve"><value>Konto erstellen</value></data>
+  <data name="Register.Header.Subtitle" xml:space="preserve"><value>Neues Konto erstellen</value></data>
+  <data name="Register.FullName" xml:space="preserve"><value>Vollständiger Name</value></data>
+  <data name="Register.Email" xml:space="preserve"><value>E-Mail</value></data>
+  <data name="Register.Username" xml:space="preserve"><value>Benutzername</value></data>
+  <data name="Register.Password" xml:space="preserve"><value>Passwort</value></data>
+  <data name="Register.AcceptTerms" xml:space="preserve"><value>Ich akzeptiere die Allgemeinen Geschäftsbedingungen</value></data>
+  <data name="Register.Submit" xml:space="preserve"><value>Registrieren</value></data>
+  <data name="Register.Google" xml:space="preserve"><value>Mit Google registrieren</value></data>
+</root>

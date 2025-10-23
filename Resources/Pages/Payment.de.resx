@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0</value></resheader>
+
+  <data name="Checkout.Progress.CartReview" xml:space="preserve"><value>Warenkorb prüfen</value></data>
+  <data name="Checkout.Progress.BillingShipping" xml:space="preserve"><value>Rechnung &amp; Versand</value></data>
+  <data name="Checkout.Progress.Payment" xml:space="preserve"><value>Zahlung</value></data>
+
+  <data name="CartItems.Title" xml:space="preserve"><value>Ihre Warenkorb-Artikel</value></data>
+  <data name="OrderSummary.Title" xml:space="preserve"><value>Bestellübersicht</value></data>
+  <data name="OrderSummary.Subtotal" xml:space="preserve"><value>Zwischensumme:</value></data>
+  <data name="OrderSummary.Shipping" xml:space="preserve"><value>Versand:</value></data>
+  <data name="OrderSummary.ShippingFree" xml:space="preserve"><value>Kostenlos</value></data>
+  <data name="OrderSummary.Total" xml:space="preserve"><value>Gesamt:</value></data>
+  <data name="Buttons.NextStep" xml:space="preserve"><value>Nächster Schritt</value></data>
+  <data name="Buttons.Back" xml:space="preserve"><value>Zurück</value></data>
+  <data name="Buttons.CompleteOrder" xml:space="preserve"><value>Bestellung abschließen</value></data>
+
+  <data name="Billing.Title" xml:space="preserve"><value>Rechnungs- &amp; Versandinformationen</value></data>
+  <data name="Payment.Title" xml:space="preserve"><value>Zahlungsinformationen</value></data>
+  <data name="FinalSummary.Title" xml:space="preserve"><value>Endgültige Bestellübersicht</value></data>
+</root>
